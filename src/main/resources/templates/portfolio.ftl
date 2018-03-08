@@ -9,6 +9,12 @@
     <script type="text/javascript" src="/static/js/index.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <style>
+        .img_height{
+            height:0px;
+            padding-bottom:25%
+        }
+    </style>
+    <style>
         /* Remove the navbar's default margin-bottom and rounded borders */
         .navbar {
             margin-bottom: 0;

@@ -105,23 +105,23 @@ public class MongoDB {
             BasicDBObject dbObject = new BasicDBObject();
             dbObject.put("meta", meta);
             dbObject.put("camera", camera);
-            FindIterable<Document> documents = faceCollection.find(dbObject).skip(limit * offset).limit(limit);
+            FindIterable<Document> documents = faceCollection.find(dbObject).skip(limit * offset).limit(limit).sort(new BasicDBObject("timestamp",-1));
             if (null == documents) {
-                return getResultJson(faceCollection.find(dbObject).limit(limit));
+                return getResultJson(faceCollection.find(dbObject).limit(limit).sort(new BasicDBObject("timestamp",-1)));
             }
             return getResultJson(documents);
         } else if (!meta.equals("")) {
-            FindIterable<Document> documents = faceCollection.find(eq("meta", meta)).skip(limit * offset).limit(limit);
+            FindIterable<Document> documents = faceCollection.find(eq("meta", meta)).skip(limit * offset).limit(limit).sort(new BasicDBObject("timestamp",-1));
             if (null == documents.first())
-                documents = faceCollection.find(eq("meta", meta)).limit(limit);
+                documents = faceCollection.find(eq("meta", meta)).limit(limit).sort(new BasicDBObject("timestamp",-1));
             return getResultJson(documents);
         } else if (!camera.equals("")) {
             FindIterable<Document> documents = faceCollection.find(eq("camera", camera)).skip(limit * offset).limit(limit);
             if (null == documents.first())
-                documents = faceCollection.find(eq("camera", camera)).limit(limit);
+                documents = faceCollection.find(eq("camera", camera)).limit(limit).sort(new BasicDBObject("timestamp",-1));
             return getResultJson(documents);
         }
-        return getResultJson(faceCollection.find().skip(limit * offset).limit(limit));
+        return getResultJson(faceCollection.find().skip(limit * offset).limit(limit).sort(new BasicDBObject("timestamp",-1)));
     }
 //        if(params.containsKey("start")&&!params.containsKey("end")){
 //            String time1 = params.get("start")[0];

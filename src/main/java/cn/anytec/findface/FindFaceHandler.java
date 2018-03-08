@@ -159,8 +159,8 @@ public class FindFaceHandler {
                         faceInfo.put("friend",face.get("friend"));
                         faceInfo.put("timestamp",new Date().getTime());
                         faceInfo.put("face",base64Img);
-                        faceInfo.put("photo","http://u1961b1648.51mypc.cn:13319/static/resource/"+camera+"/"+picId+""+String.valueOf(i)+".jpg");
-//                        faceInfo.put("photo","http://192.168.10.212:8090/static/resource/"+camera+"/"+picId+""+String.valueOf(i)+".jpg");
+//                        faceInfo.put("photo","http://u1961b1648.51mypc.cn:13319/static/resource/"+camera+"/"+picId+""+String.valueOf(i)+".jpg");
+                        faceInfo.put("photo","http://192.168.10.212:8090/static/resource/"+camera+"/"+picId+""+String.valueOf(i)+".jpg");
 //                        faceInfo.put("photo",drawboxImage64Img);
 //                        faceInfo.put("matchFace",face.get("normalized"));
                         faceInfo.put("matchFace",face.get("normalized").toString().replaceFirst("192.168.1.138:3333","u1961b1648.51mypc.cn:23887"));

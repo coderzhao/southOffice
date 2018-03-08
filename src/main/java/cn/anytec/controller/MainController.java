@@ -61,11 +61,11 @@ public class MainController implements EmbeddedServletContainerCustomizer{
         return "index";
     }
 
-    @RequestMapping(value = "/any")
+    @RequestMapping(value = "/config")
     @ResponseBody
     public String method(Map<String,String> map){
         map.put("test",test);
-        return "index";
+        return test;
     }
 
     @RequestMapping(value = "/anytec/historyManager.html")

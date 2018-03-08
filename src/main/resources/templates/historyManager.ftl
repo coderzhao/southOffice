@@ -138,8 +138,8 @@
                     queryParams: oTableInit.queryParams,//传递参数（*）
                     sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
                     pageNumber: 1,                       //初始化加载第一页，默认第一页
-                    pageSize: 3,                       //每页的记录行数（*）
-                    pageList: [2, 3, 5, 10],           //可供选择的每页的行数（*）
+                    pageSize: 10,                       //每页的记录行数（*）
+                    pageList: [10,20,30],           //可供选择的每页的行数（*）
                     search: false,                      //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
 //strictSearch: true,
 //showColumns: true,                  //是否显示所有的列
@@ -201,7 +201,7 @@
                             title: '时间',
                             formatter: function (value, row, index) {
                                 var t =parseInt(row.timestamp);
-                                var d =new Date(t);
+//                                var d =new Date(t);
 //                                d.setTime(t);
 //                                var s =d.format('yyyy-MM-dd HH-mm-ss');
                                 return timetrans(t);
