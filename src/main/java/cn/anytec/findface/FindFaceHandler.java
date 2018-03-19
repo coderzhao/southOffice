@@ -1,7 +1,7 @@
 package cn.anytec.findface;
 
 
-import cn.anytec.config.SDKConfig;
+import cn.anytec.config.AppConfig;
 import cn.anytec.mongo.MongoHandler;
 import cn.anytec.util.WsMessStore;
 import org.apache.http.HttpEntity;
@@ -10,11 +10,11 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +25,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.nio.charset.Charset;
 import java.util.*;
 
 
@@ -32,7 +33,7 @@ import java.util.*;
 public class FindFaceHandler {
 
     @Autowired
-    private SDKConfig sdkConfig;
+    private AppConfig appConfig;
 
     @Autowired
     private MongoHandler mongoHandler;
@@ -40,7 +41,7 @@ public class FindFaceHandler {
 
     private static Logger logger = LoggerFactory.getLogger(FindFaceHandler.class);
     private static JSONParser jsonParser = new JSONParser();
-    private static Base64.Encoder encoder = Base64.getEncoder();
+//    private static Base64.Encoder encoder = Base64.getEncoder();
 
     public JSONObject imageIdentify(Map<String,String[]> params, byte[] pic,String fileContentType){
         logger.info("===========identify============");
@@ -83,7 +84,7 @@ public class FindFaceHandler {
             multipartEntityBuilder.addTextBody("bbox",params.get("bbox")[0]);
         entity = multipartEntityBuilder.build();
         try {
-            response = Request.Post(sdkConfig.getURI() + "/v0/identify")
+            response = Request.Post(appConfig.getSDKURI() + "/v0/identify")
                     .connectTimeout(10000)
                     .socketTimeout(30000)
                     .addHeader("Authorization", "Token " + token)
@@ -103,6 +104,7 @@ public class FindFaceHandler {
                     Image srcImg = Toolkit.getDefaultToolkit().createImage(pic);
                     JSONObject results = (JSONObject) root.get("results");
                     Iterator iterator = results.keySet().iterator();
+                    //同一个照片中多个返回结果时在时间戳尾部加上i表示区分
                     int i=0;
 
                     while (iterator.hasNext()){
@@ -113,7 +115,7 @@ public class FindFaceHandler {
                             continue;
                         }
                         //==========根据坐标切出人脸图片=============
-                        String picId= String.valueOf(new Date().getTime());
+                        String cutFacePicId= String.valueOf(new Date().getTime());
                         String normalCoordinates = faceCoordinates.replace("[","");
                         normalCoordinates = normalCoordinates.replace("]","");
                         normalCoordinates = normalCoordinates.replace(" ","");
@@ -133,21 +135,27 @@ public class FindFaceHandler {
                             y1=0;
                         }
 
+                        //根据sdk返回坐标切出人脸并保存文件到配置的目录。
                         BufferedImage bufferedImage = cutImage(srcImg,width,height,x1,y1);
                         out = new ByteArrayOutputStream();
                         ImageIO.write(bufferedImage,"jpeg", out);
-                        String base64Img = encoder.encodeToString(out.toByteArray());
+//                        String base64Img = encoder.encodeToString(out.toByteArray());
+                        String cutFacePathAndName=appConfig.getCutFace()+camera+"/"+cutFacePicId+""+String.valueOf(i)+".jpg";
+                        File cutFace = createFile(cutFacePathAndName);
+                        ImageIO.write(bufferedImage, "jpg",cutFace);
+                        out.close();
 
+                        //根据sdk返回坐标画出人脸并保存文件到配置的文件
+                        String drawFacePicId= String.valueOf(new Date().getTime());
                         BufferedImage drawboxImage = drawBox(srcImg,width,height,x1,y1);
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         ImageIO.write(drawboxImage,"jpeg", baos);
 //                        String drawboxImage64Img = encoder.encodeToString(baos.toByteArray());
-                        String filePathAndName="/source/"+camera+"/"+picId+""+String.valueOf(i)+".jpg";
-                        File tmpFile = createFile(filePathAndName);
-
+                        String drawFacePathAndName=appConfig.getDrawFace()+camera+"/"+drawFacePicId+""+String.valueOf(i)+".jpg";
+                        File tmpFile = createFile(drawFacePathAndName);
                         ImageIO.write(drawboxImage, "jpg",tmpFile);
-
                         baos.close();
+
 
                         JSONObject match = (JSONObject) jsonArray.get(0);
                         JSONObject face = (JSONObject) match.get("face");
@@ -158,9 +166,9 @@ public class FindFaceHandler {
                         faceInfo.put("meta",face.get("meta"));
                         faceInfo.put("friend",face.get("friend"));
                         faceInfo.put("timestamp",new Date().getTime());
-                        faceInfo.put("face",base64Img);
+                        faceInfo.put("face",appConfig.getURI()+cutFacePathAndName);
 //                        faceInfo.put("photo","http://u1961b1648.51mypc.cn:13319/static/resource/"+camera+"/"+picId+""+String.valueOf(i)+".jpg");
-                        faceInfo.put("photo","http://192.168.10.212:8090/static/resource/"+camera+"/"+picId+""+String.valueOf(i)+".jpg");
+                        faceInfo.put("photo",appConfig.getURI()+drawFacePathAndName);
 //                        faceInfo.put("photo",drawboxImage64Img);
 //                        faceInfo.put("matchFace",face.get("normalized"));
                         faceInfo.put("matchFace",face.get("normalized").toString().replaceFirst("192.168.1.138:3333","u1961b1648.51mypc.cn:23887"));
@@ -170,9 +178,28 @@ public class FindFaceHandler {
 //                        faceInfo.put("photo",photoUrl);
 //                        saveValue.add(faceInfo);
                     }
+
+
                     replyJson.put("results",resultValue);
+                    //向前台推送消息
+//                    String uri=appConfig.getURI()+"/pushToClient";
+//                    Request.Post(uri)
+//                            .connectTimeout(10000)
+//                            .socketTimeout(30000)
+////                            .addHeader("Authorization", "Token " + sdkConfig.())
+//                            .body(MultipartEntityBuilder
+//                                    .create()
+//                                    .setCharset(Charset.forName(HTTP.UTF_8))
+//                                    //.addTextBody("mf_selector", "all")
+//                                    //                        .addTextBody("n", "1")
+//                                    //                        .addTextBody("bbox", String.format("[[%s,%s,%s,%s]]", x1, y1, x2, y2))
+//                                    .addTextBody("pushJson",replyJson.toJSONString())
+////                                    .addBinaryBody("photo2", photo2.getBytes(),ContentType.DEFAULT_BINARY,"photo2")
+//                                    .build())
+//                            .execute().returnResponse();
+
+                    //全局监控推送
                     WsMessStore.getInstance().addMessage(replyJson.toJSONString());
-//                    replyJson.put("results",saveValue);
                     mongoHandler.notifyMongo(replyJson);
                     i++;
                     return replyJson;
@@ -307,44 +334,44 @@ public class FindFaceHandler {
 //        }
 //    }
 
-    private String drawFaceBox(Image image,int width,int height,int x1 ,int y1) {
-        ByteArrayOutputStream out=null;
-        try {
+//    private String drawFaceBox(Image image,int width,int height,int x1 ,int y1) {
+//        ByteArrayOutputStream out=null;
+//        try {
+//
+//            if (image instanceof BufferedImage) {
+//                return "";
+//            }
+//            // This code ensures that all the pixels in the image are loaded
+//            image = new ImageIcon(image).getImage();
+//            BufferedImage bimage = null;
+//            // Create a buffered image using the default color model
+//            int type = BufferedImage.TYPE_INT_RGB;
+//            bimage = new BufferedImage(image.getWidth(null),
+//                    image.getHeight(null), type);
+////            image = ImageIO.read(in);
+//            Graphics g2d = bimage.getGraphics();
+////            Graphics2D g2d=(Graphics2D)g;
+//            g2d.setColor(Color.RED);//画笔颜色
+//            Stroke stroke=new BasicStroke(4.0f);//设置线宽为3.0
+////            g2d.setStroke(stroke);
+//            g2d.drawRect(x1, y1, width, height);
+//            g2d.dispose();
+//            out= new ByteArrayOutputStream();
+//            ImageIO.write(bimage, "jpeg", out);
+//            byte[] img = out.toByteArray();
+////            out.close();
+//            return encoder.encodeToString(img);
+//        } catch (IOException e) {
+//            logger.error("io exception " + e.getMessage());
+//            return "";
+//        }finally {
+//            try {
+//                out.close();
+//            } catch (IOException e) {
+//                logger.error(e.getMessage());
+//            }
+//        }
 
-            if (image instanceof BufferedImage) {
-                return "";
-            }
-            // This code ensures that all the pixels in the image are loaded
-            image = new ImageIcon(image).getImage();
-            BufferedImage bimage = null;
-            // Create a buffered image using the default color model
-            int type = BufferedImage.TYPE_INT_RGB;
-            bimage = new BufferedImage(image.getWidth(null),
-                    image.getHeight(null), type);
-//            image = ImageIO.read(in);
-            Graphics g2d = bimage.getGraphics();
-//            Graphics2D g2d=(Graphics2D)g;
-            g2d.setColor(Color.RED);//画笔颜色
-            Stroke stroke=new BasicStroke(4.0f);//设置线宽为3.0
-//            g2d.setStroke(stroke);
-            g2d.drawRect(x1, y1, width, height);
-            g2d.dispose();
-            out= new ByteArrayOutputStream();
-            ImageIO.write(bimage, "jpeg", out);
-            byte[] img = out.toByteArray();
-//            out.close();
-            return encoder.encodeToString(img);
-        } catch (IOException e) {
-            logger.error("io exception " + e.getMessage());
-            return "";
-        }finally {
-            try {
-                out.close();
-            } catch (IOException e) {
-                logger.error(e.getMessage());
-            }
-        }
-
-    }
+//    }
 
 }

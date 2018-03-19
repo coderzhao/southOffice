@@ -1,7 +1,7 @@
 package cn.anytec.controller;
 
 import cn.anytec.MainApplication;
-import cn.anytec.config.SDKConfig;
+import cn.anytec.config.AppConfig;
 import cn.anytec.findface.FindFaceHandler;
 import cn.anytec.mongo.MongoDB;
 import cn.anytec.mongo.MongoHandler;
@@ -12,9 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,7 +24,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -35,38 +35,63 @@ public class MainController implements EmbeddedServletContainerCustomizer{
     @Autowired
     FindFaceHandler findFaceHandler;
     @Autowired
-    SDKConfig sdkConfig;
+    AppConfig appConfig;
     @Autowired
     MongoHandler mongoHandler;
     @Autowired
     MongoDB mongoDB;
 
-    @Value("${testHtml}")
-    private String test;
+//    @Value("${testHtml}")
+//    private String test;
 
+    @Autowired
+    private SimpMessagingTemplate template;
 
     @Override
     public void customize(ConfigurableEmbeddedServletContainer container) {
         //container.setPort(8090);
     }
+
+    @MessageMapping("/hello")
+    @SendTo("/topic/greetings")
+//    @RequestMapping("/hellos")
+    public Greeting hello(String helloMessage){
+        return new Greeting("hello,"+helloMessage);
+    }
+
+//    @RequestMapping("/pushToClient")
+//    @ResponseBody
+//    public void handleSubscription(String pushJson) {
+//        template.convertAndSend("/topic/greetings",pushJson );
+////        return "hello sub";
+//    }
+
     @RequestMapping(value = "/")
     public String index(Map<String,String> map){
 //        map.put("test",test);
         return "portfolio";
     }
 
-    @RequestMapping(value = "/anytec/index.html")
-    public String test(Map<String,String> map){
-        map.put("test",test);
+    @RequestMapping(value = "/ws")
+    public String ws(){
+//        map.put("test",test);
         return "index";
     }
 
-    @RequestMapping(value = "/config")
-    @ResponseBody
-    public String method(Map<String,String> map){
-        map.put("test",test);
-        return test;
-    }
+
+
+//    @RequestMapping(value = "/anytec/index.html")
+//    public String test(Map<String,String> map){
+////        map.put("test",test);
+//        return "index";
+//    }
+
+//    @RequestMapping(value = "/config")
+//    @ResponseBody
+//    public String method(Map<String,String> map){
+//        map.put("test",test);
+//        return test;
+//    }
 
     @RequestMapping(value = "/anytec/historyManager.html")
     public String history(Map<String,String> map){
@@ -100,6 +125,7 @@ public class MainController implements EmbeddedServletContainerCustomizer{
             JSONObject reply = findFaceHandler.imageIdentify(request.getParameterMap(),pic,contentType);
             if(reply != null){
 //                mongoHandler.notifyMongo(reply);
+                template.convertAndSend("/topic/greetings",reply.toJSONString() );
                 return "success";
             }
 

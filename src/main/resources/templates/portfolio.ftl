@@ -13,8 +13,6 @@
             height:0px;
             padding-bottom:25%
         }
-    </style>
-    <style>
         /* Remove the navbar's default margin-bottom and rounded borders */
         .navbar {
             margin-bottom: 0;

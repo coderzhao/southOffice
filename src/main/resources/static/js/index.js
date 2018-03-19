@@ -61,8 +61,9 @@ $(document).ready(function () {
             for (var i = 0; i < rootJson.results.length; i++) {
                 var singleFace = rootJson.results[i];
                 if (singleFace) {
-                    var face = "data:image;base64," + singleFace["face"];
-                    var photo =singleFace["photo"];
+                    // var face = "data:image;base64," + singleFace["face"];
+                    var face = singleFace["face"];
+                    var photo = singleFace["photo"];
                     // var matchFaceURL = singleFace.matchFace;
                     // var confidence = singleFace.confidence;
                     // var meta = singleFace.meta;
