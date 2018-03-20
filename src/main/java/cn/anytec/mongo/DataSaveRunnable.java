@@ -5,6 +5,8 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Set;
+
 @Component
 public class DataSaveRunnable implements Runnable {
 
@@ -22,13 +24,17 @@ public class DataSaveRunnable implements Runnable {
             //  String base64Photo = (String)jsonObject.get("photo");
             // String photoId = (String)jsonObject.get("photoId");
             //   mongoDB.insertPhoto(photoId,base64Photo);
+
             JSONArray results = (JSONArray) jsonObject.get("results");
             for (int i = 0; i < results.size(); i++) {
                 JSONObject match = (JSONObject) results.get(i);
-                //  match.put("photoId",photoId);
-                if (match != null) {
-                    mongoDB.insertFace(match);
-                }
+                Set<String> keySet = jsonObject.keySet();
+                keySet.stream().forEach((key)->{
+                    if(!key.equals("results")){
+                        match.put(key,jsonObject.get(key));
+                    }
+                });
+                mongoDB.insertFace(match);
             }
         } catch (Exception e) {
             e.printStackTrace();
