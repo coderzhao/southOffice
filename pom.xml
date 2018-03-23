@@ -52,13 +52,13 @@
             <optional>true</optional>
         </dependency>
         <!--&lt;!&ndash;===========================================&ndash;&gt;-->
-        <!--&lt;!&ndash;================热部署模块===================&ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-devtools</artifactId>-->
-            <!--<optional>true</optional> &lt;!&ndash; 这个需要为 true 热部署才有效 &ndash;&gt;-->
-        <!--</dependency>-->
-        <!--&lt;!&ndash;===========================================&ndash;&gt;-->
+        <!--================热部署模块===================-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional> <!-- 这个需要为 true 热部署才有效 -->
+        </dependency>
+        <!--===========================================-->
         <!--&lt;!&ndash;===============spring核心===================&ndash;&gt;-->
         <!--&lt;!&ndash; 添加spring核心依赖 &ndash;&gt;-->
         <!--<dependency>-->
