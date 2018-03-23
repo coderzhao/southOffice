@@ -44,34 +44,19 @@ public class FindFaceHandler {
     private static JSONParser jsonParser = new JSONParser();
 //    private static Base64.Encoder encoder = Base64.getEncoder();
 
-    public JSONObject imageIdentify(Map<String, String[]> params, byte[] pic, String fileContentType) {
-        logger.info("===========identify============");
 
+    public JSONObject imageIdentify(Map<String,String[]> params, byte[] pic){
+        logger.info("===========identify============");
         ByteArrayOutputStream out = null;
         HttpResponse response;
         HttpEntity entity;
+        MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder.create().addBinaryBody("photo",pic, ContentType.DEFAULT_BINARY, "photo");
 
-        MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder.create().addBinaryBody("photo", pic, ContentType.DEFAULT_BINARY, "photo");
-        if (!params.containsKey("token")) {
-            logger.error("请求中未包含授权参数,请求直接返回");
-            // return "token is a must";
-        }
-        if (!params.containsKey("camera")) {
-            logger.error("请求中未包含来源参数,请求直接返回");
-            // return "resource is a must";
-        }
-//        if(!params.containsKey("meta")){
-//            logger.error("请求中未包含来源参数,请求直接返回");
-//           // return "resource is a must";
-//        }
+        String camera=params.get("camera")[0];
+        String token=params.get("token")[0];
 
-        String token = params.get("token")[0];
-        String camera = params.get("camera")[0];
-//        String meta=params.get("meta")[0];
-        if (params.containsKey("meta"))
-            multipartEntityBuilder.addTextBody("meta", params.get("meta")[0]);
-        if (params.containsKey("threshold"))
-            multipartEntityBuilder.addTextBody("threshold", params.get("threshold")[0]);
+        if(params.containsKey("threshold"))
+            multipartEntityBuilder.addTextBody("threshold",params.get("threshold")[0]);
 
 
 //        if(params.containsKey("mf_selector"))
@@ -105,11 +90,8 @@ public class FindFaceHandler {
                     Image srcImg = Toolkit.getDefaultToolkit().createImage(pic);
                     JSONObject results = (JSONObject) root.get("results");
                     Iterator iterator = results.keySet().iterator();
-                    //同一个照片中多个返回结果时在时间戳尾部加上i表示区分
-                    int i = 0;
-
-                    while (iterator.hasNext()) {
-                        String faceCoordinates = (String) iterator.next();
+                    while (iterator.hasNext()){
+                        String faceCoordinates = (String)iterator.next();
                         JSONArray jsonArray = (JSONArray) results.get(faceCoordinates);
                         if (jsonArray.size() == 0) {
 //                            resultValue.add(new JSONObject().put(faceCoordinates,"no match"));
@@ -141,7 +123,7 @@ public class FindFaceHandler {
                         out = new ByteArrayOutputStream();
                         ImageIO.write(bufferedImage, "jpeg", out);
 //                        String base64Img = encoder.encodeToString(out.toByteArray());
-                        String cutFacePathAndName = appConfig.getCutFace() + camera + "/" + cutFacePicId + "" + String.valueOf(i) + ".jpg";
+                        String cutFacePathAndName=appConfig.getCutFace()+camera+"/"+cutFacePicId+""+".jpg";
                         File cutFace = createFile(cutFacePathAndName);
                         ImageIO.write(bufferedImage, "jpg", cutFace);
                         out.close();
@@ -152,7 +134,7 @@ public class FindFaceHandler {
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         ImageIO.write(drawboxImage, "jpeg", baos);
 //                        String drawboxImage64Img = encoder.encodeToString(baos.toByteArray());
-                        String drawFacePathAndName = appConfig.getDrawFace() + camera + "/" + drawFacePicId + "" + String.valueOf(i) + ".jpg";
+                        String drawFacePathAndName=appConfig.getDrawFace()+camera+"/"+drawFacePicId+""+".jpg";
                         File tmpFile = createFile(drawFacePathAndName);
                         ImageIO.write(drawboxImage, "jpg", tmpFile);
                         baos.close();
@@ -160,26 +142,29 @@ public class FindFaceHandler {
 
                         JSONObject match = (JSONObject) jsonArray.get(0);
                         JSONObject face = (JSONObject) match.get("face");
-                        JSONObject faceInfo = new JSONObject();
-                        faceInfo.put("coordinate", faceCoordinates);
-                        faceInfo.put("confidence", match.get("confidence"));
-                        faceInfo.put("id", face.get("id"));
-                        faceInfo.put("meta", face.get("meta"));
-                        faceInfo.put("friend", face.get("friend"));
-                        faceInfo.put("timestamp", new Date().getTime());
-                        faceInfo.put("face", appConfig.getURI() + cutFacePathAndName);
+
+                        Map<String,Object> faceInfo = new HashMap<>();
+                        faceInfo.put("coordinate",faceCoordinates);
+                        faceInfo.put("confidence",match.get("confidence"));
+                        faceInfo.put("id",face.get("id"));
+                        faceInfo.put("meta",face.get("meta"));
+                        faceInfo.put("friend",face.get("friend"));
+                        faceInfo.put("timestamp",new Date().getTime());
+                        faceInfo.put("face",appConfig.getURI()+cutFacePathAndName);
 //                        faceInfo.put("photo","http://u1961b1648.51mypc.cn:13319/static/resource/"+camera+"/"+picId+""+String.valueOf(i)+".jpg");
                         faceInfo.put("photo", appConfig.getURI() + drawFacePathAndName);
 //                        faceInfo.put("photo",drawboxImage64Img);
 //                        faceInfo.put("matchFace",face.get("normalized"));
-                        faceInfo.put("matchFace", face.get("normalized").toString().replaceFirst("192.168.1.138:3333", "u1961b1648.51mypc.cn:23887"));
-                        faceInfo.put("camera", camera);
-                        resultValue.add(faceInfo);
+
+                        faceInfo.put("matchFace",face.get("normalized").toString().replaceFirst("192.168.1.138:3333","u1961b1648.51mypc.cn:23887"));
+                        faceInfo.put("camera",camera);
+                        resultValue.add(new JSONObject(faceInfo));
+
 //                        String photoUrl="http://192.168.10.212:8090/static/resource/"+camera+"/"+picId+""+String.valueOf(i)+".jpg";
 //                        faceInfo.put("photo",photoUrl);
 //                        saveValue.add(faceInfo);
-                    }
 
+                    }
 
                     replyJson.put("results", resultValue);
                     //向前台推送消息
@@ -201,8 +186,12 @@ public class FindFaceHandler {
 
                     //全局监控推送
                     WsMessStore.getInstance().addMessage(replyJson.toJSONString());
+                    //图片信息入库
+                    params.keySet().stream().forEach((key)->{
+                        if(!key.equals("camera")&&!key.equals("token")&&!key.equals("threshold"))
+                            replyJson.put(key,params.get(key)[0]);
+                    });
                     mongoHandler.notifyMongo(replyJson);
-                    i++;
                     return replyJson;
 
                 }
@@ -289,29 +278,29 @@ public class FindFaceHandler {
             return new File(destFileName);
         }
         if (destFileName.endsWith(File.separator)) {
-            System.out.println("创建单个文件" + destFileName + "失败，目标文件不能为目录！");
+            logger.error("创建单个文件" + destFileName + "失败，目标文件不能为目录！");
             return null;
         }
         //判断目标文件所在的目录是否存在
         if (!file.getParentFile().exists()) {
             //如果目标文件所在的目录不存在，则创建父目录
-            System.out.println("目标文件所在目录不存在，准备创建它！");
-            if (!file.getParentFile().mkdirs()) {
-                System.out.println("创建目标文件所在目录失败！");
+            logger.debug("目标文件所在目录不存在，准备创建它！");
+            if(!file.getParentFile().mkdirs()) {
+                logger.error("创建目标文件所在目录失败！");
             }
         }
         //创建目标文件
         try {
             if (file.createNewFile()) {
-                System.out.println("创建单个文件" + destFileName + "成功！");
+                logger.debug("创建单个文件" + destFileName + "成功！");
                 return new File(destFileName);
             } else {
-                System.out.println("创建单个文件" + destFileName + "失败！");
+                logger.error("创建单个文件" + destFileName + "失败！");
                 return null;
             }
         } catch (IOException e) {
             logger.error(e.getMessage());
-            System.out.println("创建单个文件" + destFileName + "失败！" + e.getMessage());
+            logger.error("创建单个文件" + destFileName + "失败！" + e.getMessage());
 //            return false;
         }
         return null;
