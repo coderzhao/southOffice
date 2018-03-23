@@ -232,5 +232,48 @@ public class MongoDB {
         return null;
     }
 
+//    public List<JSONObject> getImagesByCondition(Map<String, String[]> params) {
+//        Integer offset = 0;
+//        Integer limit = 10;
+//        String meta = "";
+//        String camera = "";
+//        if (params.containsKey("offset")) {
+//            offset = Integer.parseInt(params.get("offset")[0]);
+//        }
+//
+//        if (params.containsKey("limit")) {
+//            limit = Integer.parseInt(params.get("limit")[0]);
+//        }
+//
+//        if (params.containsKey("meta")) {
+//            meta = params.get("meta")[0];
+//        }
+//
+//        if (params.containsKey("camera")) {
+//            camera = params.get("camera")[0];
+//        }
+//
+//        if (!meta.equals("") && !camera.equals("")) {
+//            BasicDBObject dbObject = new BasicDBObject();
+//            dbObject.put("meta", meta);
+//            dbObject.put("camera", camera);
+//            FindIterable<Document> documents = faceCollection.find(dbObject).skip(limit * offset).limit(limit).sort(new BasicDBObject("timestamp",-1));
+//            if (null == documents) {
+//                return getResultJson(faceCollection.find(dbObject).limit(limit).sort(new BasicDBObject("timestamp",-1)));
+//            }
+//            return getResultJson(documents);
+//        } else if (!meta.equals("")) {
+//            FindIterable<Document> documents = faceCollection.find(eq("meta", meta)).skip(limit * offset).limit(limit).sort(new BasicDBObject("timestamp",-1));
+//            if (null == documents.first())
+//                documents = faceCollection.find(eq("meta", meta)).limit(limit).sort(new BasicDBObject("timestamp",-1));
+//            return getResultJson(documents);
+//        } else if (!camera.equals("")) {
+//            FindIterable<Document> documents = faceCollection.find(eq("camera", camera)).skip(limit * offset).limit(limit);
+//            if (null == documents.first())
+//                documents = faceCollection.find(eq("camera", camera)).limit(limit).sort(new BasicDBObject("timestamp",-1));
+//            return getResultJson(documents);
+//        }
+//        return getResultJson(faceCollection.find().skip(limit * offset).limit(limit).sort(new BasicDBObject("timestamp",-1)));
+//    }
 
 }
