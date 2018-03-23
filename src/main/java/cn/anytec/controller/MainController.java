@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -101,17 +102,15 @@ public class MainController implements EmbeddedServletContainerCustomizer{
 
     @RequestMapping(value = "/anytec/identify",method = RequestMethod.POST)
     @ResponseBody
-    public String anytecIdentify(HttpServletRequest request, @RequestParam("photo") MultipartFile file){
-
+    public String anytecIdentify(@RequestParam("photo") MultipartFile file,@RequestParam("token")String token,@RequestParam("camera")String camera,HttpServletRequest request){
         byte[] pic = null;
         try{
             if(!file.isEmpty()){
                 pic = file.getBytes();
             }
-
             if(pic == null)
                 return "error";
-            String contentType = file.getContentType().replace("image/","");
+            /*String contentType = file.getContentType().replace("image/","");
             if(file.getContentType().equals("application/octet-stream")){
                 String originalFilename = file.getOriginalFilename();
                 if(originalFilename.substring(originalFilename.length()-3).equals("png")){
@@ -121,8 +120,9 @@ public class MainController implements EmbeddedServletContainerCustomizer{
                 }else {
                     return "error_photo_type";
                 }
-            }
-            JSONObject reply = findFaceHandler.imageIdentify(request.getParameterMap(),pic,contentType);
+            }*/
+
+            JSONObject reply = findFaceHandler.imageIdentify(request.getParameterMap(),pic);
             if(reply != null){
 //                mongoHandler.notifyMongo(reply);
                 template.convertAndSend("/topic/greetings",reply.toJSONString() );

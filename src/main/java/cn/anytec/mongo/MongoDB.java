@@ -37,33 +37,13 @@ public class MongoDB {
     }
 
 
-    public boolean insertFace(JSONObject match) {
-        //String photoId = (String)match.get("photoId");
-        String matchFace = (String) match.get("matchFace");
-        String photo = (String) match.get("photo");
-        String base64Face = (String) match.get("face");
-        String meta = (String) match.get("meta");
-        String camera = (String) match.get("camera");
-        String coordinate = (String) match.get("coordinate");
-        String confidence = match.get("confidence").toString();
-        boolean friend = (boolean) match.get("friend");
-        long matchId = (long) match.get("id");
-        String timestamp = match.get("timestamp").toString();
-//        Date date = parseTime(timestamp);
-        faceCollection.insertOne(new Document("id", System.currentTimeMillis())
-                //      .append("photoId",photoId)
-                .append("matchId", matchId)
-                .append("photo", photo)
-                .append("matchFace", matchFace)
-                .append("meta", meta)
-                .append("camera", camera)
-                .append("face", base64Face)
-                .append("confidence", confidence)
-                .append("coordinate", coordinate)
-                .append("friend", friend)
-                .append("timestamp", timestamp)
-        );
-        return true;
+    public void insertFace(JSONObject match) {
+        Document document = new Document();
+        Set<String> keySet = match.keySet();
+        keySet.stream().forEach((key)->{
+            document.append(key,match.get(key));
+        });
+        faceCollection.insertOne(document);
     }
    /* public boolean insertPhoto(String photoId,String base64Photo){
         photoCollection.insertOne(new Document("ID",photoId)
