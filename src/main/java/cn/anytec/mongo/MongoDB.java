@@ -1,7 +1,9 @@
 package cn.anytec.mongo;
 
+import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.client.DistinctIterable;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -119,6 +121,60 @@ public class MongoDB {
 //                return null;
 //            return getResultJson(documents);
 //        }
+
+    public List<JSONObject> getFace(Double threshold, String camera, String startTime, String endTime) {
+        BasicDBObject queryObj = new BasicDBObject();
+
+        if (!threshold.equals("")) {
+            BasicDBObject confidence = new BasicDBObject("$gte",threshold);
+            queryObj.put("confidence", confidence);
+        }
+
+        if (!camera.equals("")) {
+            BasicDBList cameraList = new BasicDBList();
+            List<String> list = new ArrayList<>();
+            String[] array = camera.split(",");
+            for (String str : array) {
+                list.add(str);
+            }
+            if (list.size() > 0) {
+                cameraList.addAll(list);
+                BasicDBObject cameraQueryList = new BasicDBObject("$in", cameraList);
+                queryObj.put("camera", cameraQueryList);
+            }
+        }
+
+        if (!startTime.equals("")) {
+            if (!endTime.equals("")) {
+                startTime = startTime+" 00:00:00";
+                endTime = endTime+" 23:59:59";
+                String format ="yyyy-MM-dd HH:mm:ss";
+                SimpleDateFormat sdf = new SimpleDateFormat(format);
+                try {
+                    Long start=sdf.parse(startTime).getTime();
+                    Long end =sdf.parse(endTime).getTime();
+                    queryObj.put("timestamp", new BasicDBObject().append("$gte", start).append("$lte", end));
+                } catch (java.text.ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        FindIterable<Document> documents = faceCollection.find(queryObj).sort(new BasicDBObject("timestamp", -1));
+        if (null == documents) {
+            return null;
+        }
+        return getResultJson(documents);
+    }
+
+
+    public List<String> getCamera(){
+        List<String> cameraList = new ArrayList<>();
+        DistinctIterable<String> cameras = faceCollection.distinct("camera", String.class);
+        for (String camera : cameras) {
+            cameraList.add(camera);
+        }
+        return cameraList;
+    }
 
 
     public int getFaceNumByCondition(Map<String, String[]> params) {

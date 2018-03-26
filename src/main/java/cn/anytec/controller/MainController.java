@@ -163,51 +163,21 @@ public class MainController implements EmbeddedServletContainerCustomizer {
 
     @RequestMapping(value = "/anytec/getCameras")
     @ResponseBody
-    public JSONObject getCameras() {
-        JSONObject result = new JSONObject();
-        List<String> resultList = new ArrayList<>();
-        resultList.add("camera1");
-        resultList.add("camera2");
-        resultList.add("camera3");
-        resultList.add("camera4");
-        resultList.add("camera5");
-        result.put("result", resultList);
-        return result;
+    public List<String> getCameras() {
+        List<String> cameraList = new ArrayList<>();
+        cameraList = mongoDB.getCamera();
+        return cameraList;
     }
 
     @RequestMapping(value = "/anytec/imageSearch")
     @ResponseBody
-    public JSONObject imageSearch(@RequestParam("threshold") String threshold,@RequestParam("startTime") String startTime,
-                                  @RequestParam("endTime") String endTime,@RequestParam("cameraArray") String[] cameraArray){
-
-        DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        List<JSONObject> resultList = new ArrayList<>();
-        try {
-            Date date1 = dateFormat2.parse("2010-09-13 22:36:01");
-            Date date2 = dateFormat2.parse("2010-09-14 22:36:01");
-            Date date3 = dateFormat2.parse("2010-10-13 22:36:01");
-            Date date4 = dateFormat2.parse("2011-09-13 22:36:01");
-            JSONObject result1 = new JSONObject();
-            result1.put("photo","http://yun.anytec.cn:8080/img/index/two/max_img5.png");
-            result1.put("date",date1);
-            resultList.add(result1);
-            JSONObject result2 = new JSONObject();
-            result2.put("photo","http://yun.anytec.cn:8080/img/index/two/max_img4.png");
-            result2.put("date",date2);
-            resultList.add(result2);
-            JSONObject result3 = new JSONObject();
-            result3.put("photo","http://yun.anytec.cn:8080/img/index/two/max_img3.png");
-            result3.put("date",date3);
-            resultList.add(result3);
-            JSONObject result4 = new JSONObject();
-            result4.put("photo","http://yun.anytec.cn:8080/img/index/two/max_img2.png");
-            result4.put("date",date4);
-            resultList.add(result4);
-        } catch (ParseException e) {
-            e.printStackTrace();
+    public List<JSONObject> imageSearch(@RequestParam("threshold") String threshold,@RequestParam("startTime") String startTime,
+                                  @RequestParam("endTime") String endTime,@RequestParam("camera") String camera){
+        Double thresholdValue=Double.parseDouble(threshold);
+        List<JSONObject> jsonObjectList = mongoDB.getFace(thresholdValue,camera,startTime,endTime);
+        if (jsonObjectList == null){
+            return null;
         }
-        JSONObject photoResult = findFaceHandler.getPhotoResult(resultList);
-        return photoResult;
-
+        return jsonObjectList;
     }
 }
