@@ -107,10 +107,13 @@ public class MainController implements EmbeddedServletContainerCustomizer {
     public String identifiedSearch(Map<String, String> map) {
         return "identified_search";
     }
+    @RequestMapping(value = "/anytec/portrait_search.html")
+    public String portraitSearchSearch(Map<String, String> map) {
+        return "portrait_search";
+    }
 
     @RequestMapping(value = "/anytec/identify", method = RequestMethod.POST)
     @ResponseBody
-
     public String anytecIdentify(@RequestParam("photo") MultipartFile file,@RequestParam("token")String token,@RequestParam("camera")String camera,HttpServletRequest request){
 
         byte[] pic = null;

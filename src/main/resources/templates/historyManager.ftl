@@ -173,8 +173,8 @@
                             title: '切出人脸',
                             formatter: function (value, row, index) {
                                 if ('' != value && null != value) {
-                                    value = '<img src="data:image;base64,' + value + '" style="height: 100px;width:100px;" onclick="showImageDetail(this)"/>';
-//                                    value = '<img src="' + value + '" style="height: 100px;width:100px;" onclick="showImageDetail(this)"/>';
+//                                    value = '<img src="data:image;base64,' + value + '" style="height: 100px;width:100px;" onclick="showImageDetail(this)"/>';
+                                    value = '<img src="' + value + '" style="height: 100px;width:100px;" onclick="showImageDetail(this)"/>';
                                     return value;
                                 }
                             }

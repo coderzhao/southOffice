@@ -7,13 +7,8 @@
     <title>人像检索</title>
     <link rel="stylesheet" href="/static/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/static/css/identified_search.css"/>
-    <link rel="stylesheet" href="/static/css/laydate.css"/>
+    <link rel="stylesheet" href="/static/css/jedate.css"/>
     <link rel="stylesheet" href="/static/css/jquery-ui.min.css"/>
-    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/static/js/identified_search.js"></script>
-    <script type="text/javascript" src="/static/js/laydate.dev.js"></script>
-    <script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -29,19 +24,19 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="#">预警平台</a></li>
-                <li><a href="protection.html"><span>|</span>布防管理</a></li>
+                <li><a href="../../"><span>|</span>布防管理</a></li>
                 <li><a href="/anytec/historyManager.html"><span>|</span>查询历史</a></li>
-                <li class="nav_active"><a href="/anytec/identified_search.html"><span>|</span>人像检索</a></li>
+                <li class="nav_active"><a href="/anytec/portrait_search.html"><span>|</span>人像检索</a></li>
             </ul>
         </div>
     </div>
 </nav>
 <div class="left_container">
     <div class="leftbtn_01">
-        <a href="#">人<br>像<br>检<br>索</a>
+        <a href="/anytec/portrait_search.html">人<br>像<br>检<br>索</a>
     </div>
     <div class="leftbtn_02">
-        <a href="#">通<br>过<br>设<br>备<br>搜<br>索</a>
+        <a href="/anytec/identified_search.html">通<br>过<br>设<br>备<br>搜<br>索</a>
     </div>
 </div>
 <div class="container max_container">
@@ -75,13 +70,13 @@
                         <div class="start_date">
                             <div class="sart_text">起始</div>
                             <div class="demo1">
-                                <input type="text" id="startTime" readonly="readonly" value="2018-03-03">
+                                <input type="text" id="dateinfo" readonly="readonly" value="2018-03-03">
                             </div>
                         </div>
                         <div class="end_date">
                             <div class="sart_text">结束</div>
                             <div class="demo1">
-                                <input type="text" id="endTime" readonly="readonly" value="2018-03-07">
+                                <input type="text" id="dateinfo2" readonly="readonly" value="2018-03-07">
                             </div>
                         </div>
                     </div>
@@ -134,8 +129,8 @@
                     <div class="time_day day01">
                         <div class="container box_time">
                             <div class="row" id="photoResult">
-                                <div class="col-md-3 col-sm-4 col-xs-6 screenshots">
-                                    <div class="screenshots_box">
+                                <div class="col-md-3 col-sm-4 col-xs-6">
+                                    <div >
                                         <img src="/static/img/img1.png"/>
                                         <div class="img_time">5时4分58秒</div>
                                     </div>
@@ -163,5 +158,10 @@
 </div>
 <div class="bottom_01"></div>
 <div class="bottom_02"></div>
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/js/identified_search.js"></script>
+<script type="text/javascript" src="/static/js/jedate.js"></script>
+<script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
 </body>
 </html>

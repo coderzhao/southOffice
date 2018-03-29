@@ -6,6 +6,7 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.DistinctIterable;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.json.simple.JSONArray;
@@ -266,6 +267,15 @@ public class MongoDB {
         }
         logger.error("时间转换失败");
         return null;
+    }
+
+
+    public MongoCursor<Document> datetime(){
+//        mongoClient
+//        Query query=new Query(Criteria.where("date").gte(startDate).lte(endDate));
+
+        return faceCollection.find(lte("timestamp","1517038652538")).iterator();
+
     }
 
 //    public List<JSONObject> getImagesByCondition(Map<String, String[]> params) {

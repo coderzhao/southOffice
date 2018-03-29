@@ -30,13 +30,6 @@ $(document).ready(function(){
         }
     });
 
-    laydate({
-        elem: '#startTime'
-    });
-    laydate({
-        elem: '#endTime'
-    });
-
 })
 
 function allCheck() {

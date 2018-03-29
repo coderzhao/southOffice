@@ -93,8 +93,10 @@ ul li:last-child a span
 	position: relative;
 	border-top-right-radius: 10px;
 	border-bottom-right-radius: 10px;
+	cursor: pointer;
 }
 .leftbtn_01_1{
+	font-family: 微软雅黑;
 	background-color: #ec6941;
 	max-width: 65px;
 	height: 30%;
@@ -104,6 +106,7 @@ ul li:last-child a span
 	border-top-right-radius: 15px;
 	border-bottom-right-radius: 15px;
     box-shadow: 5px 5px 5px #4e4d4d;
+    cursor: pointer;
 }
 .leftbtn_01 a,.leftbtn_02_1 a{
 	font-size: 2.6vmin;
@@ -123,8 +126,10 @@ ul li:last-child a span
 	border-top-right-radius: 15px;
 	border-bottom-right-radius: 15px;
 	box-shadow: 5px 5px 5px #4e4d4d;
+	cursor: pointer;
 }
 .leftbtn_02_1{
+	font-family: 微软雅黑;
 	background-color: #535353;
 	max-width: 50px;
 	height: 45%;
@@ -134,6 +139,7 @@ ul li:last-child a span
 	position: relative;
 	border-top-right-radius: 10px;
 	border-bottom-right-radius: 10px;
+	cursor: pointer;
 }
 .leftbtn_02 a,.leftbtn_01_1 a{
 	font-size: 3vmin;
@@ -141,6 +147,9 @@ ul li:last-child a span
 	position: absolute;
 	top: 10%;
 	left: 30%;
+}
+.leftbtn_01_1 a:hover,.leftbtn_02_1 a:hover{
+	color: white;
 }
 .equipment_container{
 	border: 5px solid #535353;
@@ -489,7 +498,7 @@ ul li:last-child a span
     margin-right: 1%;
     width: 19%;
 }
-input#startTime ,input#endTime{
+input#J-xl ,input#J-xl2{
     width: 100%;
     height: 35px;
     color: #5c5c5c;
@@ -805,4 +814,395 @@ input#startTime ,input#endTime{
 	float: right;
 	height: 100%;
 	border: 1px solid #000000;
+}
+.top_editor{
+	width: 100%;
+	height: 15%;
+	position: relative;
+}
+.bottom_table{
+	width: 100%;
+	height: 80%;
+	overflow: auto;
+}
+.editor_box{
+	border: 5px solid #535353;
+	width: 90%;
+	height: 80%;
+	position: absolute;
+	top: 10%;
+	left: 5%;
+}
+.table_center{
+	width: 100%;
+	height: 80%;
+	margin-top: 60px;
+}
+.editor_centerBox{
+	width: 100%;
+	height: 100%;
+	position: relative;
+	background-color: #d5d4d4;
+}
+.editor_enterBox2{
+	width: 96%;
+	height: 60%;
+	position: absolute;
+	top: 20%;
+	left: 2%;
+}
+.left_btnBox,.left_searchBox{
+	width:50%;
+	height: 100%;
+	float: left;
+}
+.add_personnel,.remove_personnel,.editor_personnel{
+	width: 26%;
+	margin-right: 2%;
+	height: 100%;
+	border: 4px solid #535353;
+	font-size: 2.5vmin;
+	text-align: center;
+	background-color: #707070;
+	color: white;
+	cursor: pointer;
+	float: left;
+}
+.add_personnel:hover,.remove_personnel:hover,.editor_personnel:hover{
+	background: #ec6941;
+}
+.search_bg{
+	float: right;
+	width: 60%;
+	height: 100%;
+	background-color: #535353;
+	padding: 5px;
+}
+.search_input{
+	width: 85%;
+	height: 100%;
+	float: left;
+	background: white;
+}
+.search_btn{
+	width: 15%;
+	height: 100%;
+	float: left;
+	cursor: pointer;
+	text-align: center;
+}
+.search_btn img{
+	height: 100%;
+	margin: 0 auto;
+}
+.search_text{
+	width: 100%;
+	height: 100%;
+	outline: none;
+}
+input::-webkit-input-placeholder{
+	color: #afafaf;
+}
+.table_box{
+	width: 90%;
+	margin-left: 5%;
+	max-height: 100%;
+	border: 5px solid #7e7d7d;
+	overflow: auto;
+	overflow-x:hidden;
+}
+.table_box table{
+	width: 100%;
+    border: 1px solid #7e7d7d;
+}
+.table_box table tr{
+	border-bottom: 1px solid red;
+}
+.one_th,.one_td{
+	text-align: center;
+}
+.all_select{
+	margin: 0 auto;
+	width: 18px;
+	height: 18px;
+	border: 1px solid #535353;
+}
+.one_select{
+	margin: 0 auto;
+	width: 18px;
+	height: 18px;
+	border: 1px solid #535353;
+}
+.tb_header{
+	height: 50px;
+}
+.table_box{
+	font-size: 2vmin;
+}
+.tb_header th{
+	border-bottom: 3px solid #7e7d7d;
+	font-size: 2.3vmin;
+}
+.tb_tr{
+	min_height: 80px;
+	border: 2px solid #e5e5e5;
+}
+.td_portrait{
+	margin-top: 5%;
+	margin-bottom: 5%;
+	max-height: 100px;
+}
+.two_table img{
+	width: 100px;
+	height: 100px;
+}
+/*遮罩层以及弹出框*/
+.mask{
+	position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+    background-color: #000;
+    display: none;
+    opacity: 0.6;
+}
+.add_pop-up{
+    position: fixed;
+    top: 20%;
+    left: 30%;
+    width: 40%;
+    height: 60%;
+    border: 4px solid #535353;
+    background-color: #e5e5e5;
+    display: none;
+    z-index: 9999;
+}
+.pop-upTitle{
+	width: 100%;
+	height: 15%;
+	border-bottom: 4px solid #535353;
+}
+.pop-upCenter{
+	width: 100%;
+	height: 60%;
+	position: relative;
+}
+.pop-upBtn{
+	height: 25%;
+	width: 100%;
+}
+.add_title{
+	width: 50%;
+	height: 100%;
+	font-size: 3vmin;
+	font-weight: 800;
+	color: #535353;
+	padding-left: 2%;
+	float: left;
+	position: relative;
+}
+.add_textBox{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	display: table;
+}
+.add_text{
+	width: 100%;
+	height: 100%;
+	display: table-cell;
+	vertical-align: middle;
+	
+}
+.shut_down{
+	height: 100%;
+	border-left: 4px solid #535353;
+	float: right;
+	cursor: pointer;
+}
+.shut_down img{
+	height: 100%;
+}
+.pop_centerBox{
+	position: absolute;
+	left: 5%;
+	top: 10%;
+	width: 90%;
+	height: 80%;
+}
+.left_addinput{
+	width: 40%;
+	height:100%;
+	position: relative;
+	border: 4px solid #535353;
+	float: left;
+}
+.file_img{
+	width: 100%;
+	height: 100%;
+}
+.file_imgwidth{
+	width: 100%;
+}
+.file_imgheight{
+	height: 100%;
+}
+.pop_file{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	cursor: pointer;
+}
+.pop_iocn img{
+	width:100%;
+}
+.informationBox{
+	float: left;
+	margin-left: 5%;
+	width: 55%;
+	height: 100%;
+}
+.the_input{
+	width: 100%;
+	height: 20%;
+	border: 2px solid #535353;
+	margin-bottom: 5%;
+}
+.inf_name{
+	width: 25%;
+	height: 100%;
+	text-align: center;
+	font-size: 2.7vmin;
+	position: relative;
+	float: left;
+	color: white;
+	background-color: #7d7d7d;
+	border-right: 2px solid #535353;
+}
+.one_th,.one_td{
+	width: 6%;
+}
+.two_th,.two_td{
+	width: 14%;
+}
+.three_th,.three_td{
+	width: 15%;
+}
+.four_th,.four_td{
+	width: 10%;
+}
+.five_th,.five_td{
+	width: 20%;
+}
+.six_th,.six_td{
+	width: 10%;
+}
+.seven_th,.seven_td{
+	width: 15%;
+}
+.name_text{
+	position: absolute;
+	display: table;
+	width: 100%;
+	height: 100%;
+}
+.name_cell{
+	height: 100%;
+	display: table-cell;
+	vertical-align: middle;
+}
+.inf_inputBox{
+	width: 75%;
+	height: 100%;
+	float: left;
+	border: 1px solid slateblue;
+}
+.inf_inputBox input{
+	width: 100%;
+	height: 100%;
+	padding-left: 4px;
+	font-size: 2.3vmin;
+}
+.inf_inputBox select{
+	width: 100%;
+	height: 100%;
+	padding-left: 4px;
+	font-size: 2.3vmin;
+}
+.save_btn{
+	width: 100%;
+	height: 50%;
+	font-size: 4vmin;
+	background-color: white;
+	position: relative;
+	color: #7d7d7d;
+	cursor: pointer;
+}
+.save_btn:hover{
+	background-color: #7d7d7d;
+	color: white;
+}
+.save_box{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	display: table;
+}
+.save_cell{
+	width: 100%;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle;
+}
+.uncheck_t{
+	position: fixed;
+	left: 35%;
+	top: 35%;
+	border-radius: 10px;
+	z-index: 9999;
+	width: 30%;
+	height: 30%;
+	display: none;
+	background-color: white;
+	border: 4px solid #535353;
+}
+.delete_t{
+	position: fixed;
+	left: 35%;
+	top: 35%;
+	border-radius: 10px;
+	z-index: 9999;
+	width: 30%;
+	height: 30%;
+	display: none;
+	background-color: white;
+	border: 4px solid #535353;
+}
+.uncheck_text{
+	width: 100%;
+	height: 30%;
+	text-align: center;
+	font-size: 3vmin;
+	padding-top: 10%;
+	padding-bottom: 10%;
+}
+.uncheck_btn{
+	width: 100%;
+	height: 15%;
+	margin-top: 10%;
+	text-align: center;
+}
+.unc_btn{
+	width: 30%;
+	height: 100%;
+	font-size: 2.2vmin;
+	margin: 0 auto;
+}
+.addimg_border{
+	border: 4px solid red !important;
 }

@@ -1,0 +1,174 @@
+﻿@charset "utf-8";
+
+/* 代码整理：大头网 www.datouwang.com */
+
+body,
+ul,
+dl,
+dd,
+dt,
+ol,
+li,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+textarea,
+form,
+select,
+fieldset,
+table,
+td,
+div,
+input {
+	margin: 0;
+	padding: 0;
+	-webkit-text-size-adjust: none
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-size: 12px;
+	font-weight: normal
+}
+
+a img {
+	border: 0
+}
+
+body {
+	color: #333;
+	text-align: center;
+	font: 12px "宋体";
+}
+
+ul,
+ol,
+li {
+	list-style-type: none;
+	vertical-align: 0
+}
+
+a {
+	outline-style: none;
+	color: #535353;
+	text-decoration: none
+}
+
+a:hover {
+	color: #D40000;
+	text-decoration: none
+}
+
+#zsgun {
+	background: #FFFFFF;
+    position: relative;
+    height: 80%;
+    width: 100%;
+    margin: auto;
+}
+
+a.hScrollPane_leftarrow {
+	top: 30%;
+	cursor: pointer;
+	display: block;
+	width: 25px;
+	height: 58px;
+	background: url(images/zsleftbar.gif) no-repeat left top;
+	left: 15px;
+	position: absolute;
+}
+
+a.hScrollPane_leftarrow:hover {
+	background: url(images/zsleftbar.gif) no-repeat left -58px;
+}
+
+a.hScrollPane_rightarrow {
+	top: 30%;
+	cursor: pointer;
+	display: block;
+	width: 25px;
+	height: 58px;
+	background: url(images/zsrightbar.gif) no-repeat left top;
+	right: 15px;
+	position: absolute;
+}
+
+a.hScrollPane_rightarrow:hover {
+	background: url(images/zsrightbar.gif) no-repeat left -58px;
+}
+
+.hScrollPane_dragbar {
+    width: 80%;
+    height: 10%;
+    position: absolute;
+    border-bottom: #b45334 1px solid;
+    left: 10%;
+    top: 83%;
+    z-index: 1;
+    padding: 0 39px;
+}
+
+.hScrollPane_draghandle {
+	position: absolute;
+	width: 180px;
+	height: 10px;
+	overflow: hidden;
+	background: url(images/gunbar.png) no-repeat left top;
+	_background: url(images/gunbar.gif) no-repeat left top;
+	bottom: -5px;
+	cursor: pointer;
+	margin: 0 39px;
+	left: 0;
+}
+
+#gundiv {
+	width: 80%;
+    position: relative;
+    margin-left: 10%;
+    padding-top: 22px;
+    float: left;
+    display: inline;
+    height: 80%;
+    overflow: hidden;
+}
+#gundiv img{
+	border: 1px solid #8C8C8C;
+}
+#gundiv ul {
+	height: 155px;
+	position: absolute;
+	width: 10000px;
+}
+
+#gundiv li {
+	width: 155px;
+    height: 100%;
+	overflow: hidden;
+	float: left;
+	margin-right: 17px;
+	position: relative;
+}
+#gundiv li img{
+	height: 80%;
+}
+#gundiv li p {
+	/*display: none;*/
+	height: 18px;
+	line-height: 18px;
+	text-align: center;
+	overflow: hidden;
+}
+
+#gundiv li p a:link,
+#gundiv li p a:visited {
+	color: #53711C;
+	font-size: 12px;
+}
