@@ -145,7 +145,7 @@ a.hScrollPane_rightarrow:hover {
 #gundiv ul {
 	height: 155px;
 	position: absolute;
-	width: 10000px;
+	width: 100%;
 }
 
 #gundiv li {

@@ -73,7 +73,7 @@ public class MainController implements EmbeddedServletContainerCustomizer {
 //    }
 
     @RequestMapping(value = "/")
-    public String index(Map<String, String> map) {
+    public String index() {
 //        map.put("test",test);
         return "portfolio";
     }
@@ -84,6 +84,12 @@ public class MainController implements EmbeddedServletContainerCustomizer {
         return "index";
     }
 
+
+    @RequestMapping(value = "/test")
+    public String test() {
+//        map.put("test",test);
+        return "test";
+    }
 
 //    @RequestMapping(value = "/anytec/index.html")
 //    public String test(Map<String,String> map){
@@ -98,18 +104,18 @@ public class MainController implements EmbeddedServletContainerCustomizer {
 //        return test;
 //    }
 
-    @RequestMapping(value = "/anytec/historyManager.html")
-    public String history(Map<String, String> map) {
+    @RequestMapping(value = "/anytec/historyManager")
+    public String historyManager() {
         return "historyManager";
     }
 
-    @RequestMapping(value = "/anytec/identified_search.html")
-    public String identifiedSearch(Map<String, String> map) {
-        return "identified_search";
+    @RequestMapping(value = "/anytec/cameraSearch")
+    public String cameraSearch() {
+        return "cameraSearch";
     }
-    @RequestMapping(value = "/anytec/portrait_search.html")
-    public String portraitSearchSearch(Map<String, String> map) {
-        return "portrait_search";
+    @RequestMapping(value = "/anytec/portraitSearch")
+    public String portraitSearch() {
+        return "portraitSearch";
     }
 
     @RequestMapping(value = "/anytec/identify", method = RequestMethod.POST)
@@ -136,7 +142,6 @@ public class MainController implements EmbeddedServletContainerCustomizer {
                     return "error_photo_type";
                 }
             }*/
-
             JSONObject reply = findFaceHandler.imageIdentify(request.getParameterMap(),pic);
             if(reply != null){
 
@@ -182,5 +187,18 @@ public class MainController implements EmbeddedServletContainerCustomizer {
             return null;
         }
         return jsonObjectList;
+    }
+
+
+    @RequestMapping(value = "/anytec/imageSearchByCamera")
+    @ResponseBody
+    public List<JSONObject> imageSearchByCamera(@RequestParam("threshold") String threshold,@RequestParam("startTime") String startTime,
+                                        @RequestParam("endTime") String endTime,@RequestParam("camera") String camera){
+        Double thresholdValue=Double.parseDouble(threshold);
+        List<JSONObject> jsonObjectList = mongoDB.getFaceByCamera(thresholdValue,camera,startTime,endTime);
+        if (jsonObjectList == null){
+            return null;
+        }
+        return findFaceHandler.getPhotoResults(jsonObjectList);
     }
 }

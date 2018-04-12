@@ -5,9 +5,10 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>人像检索</title>
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/static/css/identified_search.css"/>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/cameraSearch.css"/>
     <link rel="stylesheet" href="/static/css/jedate.css"/>
+    <link rel="stylesheet" href="/static/css/about.css"/>
     <link rel="stylesheet" href="/static/css/jquery-ui.min.css"/>
 </head>
 <body>
@@ -25,18 +26,18 @@
             <ul class="nav navbar-nav">
                 <li><a href="#">预警平台</a></li>
                 <li><a href="../../"><span>|</span>布防管理</a></li>
-                <li><a href="/anytec/historyManager.html"><span>|</span>查询历史</a></li>
-                <li class="nav_active"><a href="/anytec/portrait_search.html"><span>|</span>人像检索</a></li>
+                <li><a href="/anytec/historyManager"><span>|</span>查询历史</a></li>
+                <li class="nav_active"><a href="/anytec/portraitSearch"><span>|</span>人像检索</a></li>
             </ul>
         </div>
     </div>
 </nav>
 <div class="left_container">
     <div class="leftbtn_01">
-        <a href="/anytec/portrait_search.html">人<br>像<br>检<br>索</a>
+        <a href="/anytec/portraitSearch">人<br>像<br>检<br>索</a>
     </div>
     <div class="leftbtn_02">
-        <a href="/anytec/identified_search.html">通<br>过<br>设<br>备<br>搜<br>索</a>
+        <a href="/anytec/camearaSearch">通<br>过<br>设<br>备<br>搜<br>索</a>
     </div>
 </div>
 <div class="container max_container">
@@ -50,17 +51,11 @@
                     <div class="left_similarity">
                         <div class="left_title">相似度</div>
                         <div class="left_percentage" id="threshold">75%</div>
-                    <#--<div class="left_progress">-->
-                    <#--<div class="progress">-->
-                    <#--<div class="progress-bar" aria-valuenow="40" aria-valuemax="100" aria-valuemin="0" style="width:87%;">-->
-                    <#--</div>-->
-                    <#--</div>-->
-                    <#--</div>-->
                         <div class="left_progress">
                             <div class="progress">
                                 <div class="progress-bar" aria-valuenow="40" aria-valuemax="100" aria-valuemin="0"
                                      style="width:100%;">
-                                    <div id="slider"></div>
+                                    <div id="slider" class="slidercolor"></div>
                                 </div>
                             </div>
                         </div>
@@ -70,13 +65,13 @@
                         <div class="start_date">
                             <div class="sart_text">起始</div>
                             <div class="demo1">
-                                <input type="text" id="dateinfo" readonly="readonly" value="2018-03-03">
+                                <input type="text" id="startTime" readonly="readonly" value="2018-03-03 0:0:0" >
                             </div>
                         </div>
                         <div class="end_date">
                             <div class="sart_text">结束</div>
                             <div class="demo1">
-                                <input type="text" id="dateinfo2" readonly="readonly" value="2018-03-07">
+                                <input type="text" id="endTime" readonly="readonly" value="2018-04-07 23:59:59">
                             </div>
                         </div>
                     </div>
@@ -98,59 +93,38 @@
                             </div>
                         </div>
                     </div>
-                    <div id="msg"></div>
                     <div class="bottom_btn">
+                        <div id="msg" class="msg_font"></div>
                         <div class="btn_box">
-                            <div class="btn_01" onclick="allCheck()">
-                                全选
+                            <div class="btn_01" onclick="allCheck()" style="margin-right:20px;">
+                                <div class="button_font">全选</div>
                             </div>
-                            <div class="btn_01" onclick="reverseCheck()">
-                                反选
+                            <div class="btn_01" onclick="reverseCheck()" style="margin-right:20px;">
+                                <div class="button_font">反选</div>
                             </div>
                             <div class="btn_01">
-                                <img src="/static/img/icon_01.png" onclick="imageSearch()"/>
+                                <img src="/static/img/icon_01.png" onclick="cameraSearch()"/>
                             </div>
-                            <div class="btn_02">
-                                <img src="/static/img/icon_02.png"/>
-                            </div>
+                            <#--<div class="btn_02">-->
+                                <#--<img src="/static/img/icon_02.png"/>-->
+                            <#--</div>-->
                         </div>
                     </div>
                 </div>
 
             </div>
         </div>
+
         <div class="col-lg-6 col_01">
             <div class="time_container">
-                <div class="bottom_time">
-                    <div class="top_date">
-                        <div class="left_month" id="month">x月</div>
-                        <div class="right_year" id="year">xxxx年</div>
+                <div class="page">
+                    <div class="box">
+                        <ul class="event_year" id="timeList">
+                        </ul>
+                        <ul class="event_list" id="photoResult">
+
+                        </ul>
                     </div>
-                    <div class="time_day day01">
-                        <div class="container box_time">
-                            <div class="row" id="photoResult">
-                                <div class="col-md-3 col-sm-4 col-xs-6">
-                                    <div >
-                                        <img src="/static/img/img1.png"/>
-                                        <div class="img_time">5时4分58秒</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <#--<div class="time_day">-->
-                <#--<div class="container box_time">-->
-                <#--<div class="row row_box">-->
-                <#--<div class="day_digital">5</div>-->
-                <#--<div class="col-md-3 col-sm-4 col-xs-6 screenshots">-->
-                <#--<div class="screenshots_box">-->
-                <#--<img src="/static/img/img1.png" />-->
-                <#--<div class="img_time">5时4分58秒</div>-->
-                <#--</div>-->
-                <#--</div>-->
-                <#--</div>-->
-                <#--</div>-->
-                <#--</div>-->
                 </div>
             </div>
         </div>
@@ -158,9 +132,21 @@
 </div>
 <div class="bottom_01"></div>
 <div class="bottom_02"></div>
+<script>
+    $(function(){
+        $('label').click(function(){
+            $('.event_year>li').removeClass('current');
+            $(this).parent('li').addClass('current');
+            var year = $(this).attr('for');
+            alert(year);
+            $('#'+year).parent().prevAll('div').slideUp(800);
+            $('#'+year).parent().slideDown(800).nextAll('div').slideDown(800);
+        });
+    });
+</script>
 <script type="text/javascript" src="/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/static/js/identified_search.js"></script>
+<script type="text/javascript" src="/static/js/cameraSearch.js"></script>
 <script type="text/javascript" src="/static/js/jedate.js"></script>
 <script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
 </body>
