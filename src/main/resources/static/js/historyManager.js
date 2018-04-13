@@ -4,6 +4,16 @@ $("#btn_query").click(function () {
 //
 });
 $(function () {
+    $.ajax({
+        url: "/anytec/getRegisterUrl",
+        type: "post",
+        dataType: "json",
+        success: function (data) {
+            if (data != null) {
+                $("#register").attr("href", data.url);
+            }
+        }
+    });
 //
 //1.初始化Table
     var oTable = new TableInit();
@@ -20,11 +30,11 @@ $(function () {
         type: "post",
         dataType: "json",
         success: function (data) {
-            if(data.length>0){
+            if (data.length > 0) {
                 $("#camera").append("<option value=''></option>")
                 for (var index in data) {
                     $("#camera").append(
-                        "<option value='"+ data[index] + "'>" +data[index]+"</option>");
+                        "<option value='" + data[index] + "'>" + data[index] + "</option>");
                 }
             }
         },
@@ -51,7 +61,7 @@ var TableInit = function () {
             sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
             pageNumber: 1,                       //初始化加载第一页，默认第一页
             pageSize: 10,                       //每页的记录行数（*）
-            pageList: [10,20,30],           //可供选择的每页的行数（*）
+            pageList: [10, 20, 30],           //可供选择的每页的行数（*）
             search: false,                      //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
 //strictSearch: true,
 //showColumns: true,                  //是否显示所有的列
@@ -108,11 +118,11 @@ var TableInit = function () {
                             return value;
                         }
                     }
-                },{
+                }, {
                     field: 'timestamp',
                     title: '时间',
                     formatter: function (value, row, index) {
-                        var t =parseInt(row.timestamp.$numberLong);
+                        var t = parseInt(row.timestamp.$numberLong);
 //                                var d =new Date(t);
 //                                d.setTime(t);
 //                                var s =d.format('yyyy-MM-dd HH-mm-ss');
@@ -127,11 +137,11 @@ var TableInit = function () {
     oTableInit.queryParams = function (params) {
         var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
             limit: params.limit,   //页面大小
-            offset: params.offset/params.limit,  //页码
+            offset: params.offset / params.limit,  //页码
             meta: $("#meta").val(),
-            camera:$("#camera").val(),
-            startTime:$("#startTime").val(),
-            endTime:$("#endTime").val()
+            camera: $("#camera").val(),
+            startTime: $("#startTime").val(),
+            endTime: $("#endTime").val()
         };
         return temp;
     };
@@ -161,16 +171,16 @@ function changeDateFormat(val) {
 }
 
 
-function timetrans(date){
+function timetrans(date) {
 
     var date = new Date(date);//如果date为13位不需要乘1000
     var Y = date.getFullYear() + '-';
-    var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
     var D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' ';
     var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
-    var m = (date.getMinutes() <10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
-    var s = (date.getSeconds() <10 ? '0' + date.getSeconds() : date.getSeconds());
-    return Y+M+D+h+m+s;
+    var m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+    var s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds());
+    return Y + M + D + h + m + s;
 }
 
 //
@@ -178,6 +188,7 @@ function timetrans(date){
 function showImageDetail(obj) {
     imgShow("#outerdiv", "#innerdiv", "#bigimg", obj);
 }
+
 //
 //弹出显示图片大图
 function imgShow(outerdiv, innerdiv, bigimg, obj) {
@@ -190,4 +201,5 @@ function imgShow(outerdiv, innerdiv, bigimg, obj) {
         $(this).fadeOut("fast");
     });
 }
+
 //

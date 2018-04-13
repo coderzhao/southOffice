@@ -477,7 +477,7 @@ h1 {
 }
 .imgbox{
     float: left;
-    width: 80%;
+    width: 85%;
     margin-left: 10%;
     margin-right: 10%;
     border-bottom: 2px solid #DDD;
@@ -497,10 +497,9 @@ h1 {
 	height: 80px;
 }
 .event_img img{
-	width: 100%;
 	height: 100%;
 }
 .event_text{
-	text-align: center;
+	/*text-align: center;*/
 	color: #ec6941;
 }

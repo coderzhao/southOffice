@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/jedate.css"/>
     <style>
+        body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 { font-family: Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;}
         /* Remove the navbar's default margin-bottom and rounded borders */
         .navbar {
             margin-bottom: 0;
@@ -26,13 +27,29 @@
             font-size: 2.5vmin;
             font-family: 微软雅黑;
         }
+        .col-sm-2{
+            height: 80px;
+        }
+        .navbar-nav li a {
+            font-size: 2.5vmin;
+            color: white !important;
+            font-family: 微软雅黑;
+            text-align: left;
+        }
+        .nav_active a {
+            font-size: 3.5vmin !important;
+        }
+        .spanStyle{
+            padding-left: 10px;
+            padding-right: 10px;
+        }
     </style>
 </head>
 <body>
 
 <!--导航栏-->
 
-<nav class="navbar navbar-inverse">
+<#--<nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -40,14 +57,36 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <!--<a class="navbar-brand" href="#">预警平台</a>-->
+            <!--<a class="navbar-brand" href="#">预警平台</a>&ndash;&gt;
             <a class="navbar-brand" href="#historyManager">查询历史</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li><a href="../../" target="_blank">预警平台</a></li>
-                <li><a href="http://u1961b1648.51mypc.cn:24850" target="_blank">布防管理</a></li>
-                <li><a href="/anytec/portraitSearch" target="_blank">人像检索</a></li>
+                <li><a href="../../">预警平台</a></li>
+                <li><a id="register">布防管理</a></li>
+                <li><a href="/anytec/portraitSearch">人像检索</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>-->
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+<#--<div class="container">-->
+    <div>
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only"></span>
+                <span class="icon-bar "></span>
+                <span class="icon-bar "></span>
+                <span class="icon-bar "></span>
+            </button>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/" style="margin-left: 10px;margin-right:-20px;">预警平台</a></li>
+                <li><a id="register" style="margin-right: -20px;"><span class="spanStyle">|</span>布防管理</a></li>
+                <li class="nav_active"><a href="/anytec/historyManager" style="margin-right: -20px;"><span class="spanStyle">|</span>查询历史</a></li>
+                <li><a href="/anytec/portraitSearch" style="margin-right: -20px;"><span class="spanStyle">|</span>人像检索</a></li>
             </ul>
         </div>
     </div>
@@ -85,7 +124,7 @@
                         <input type="text" id="endTime" readonly="readonly" value="2018-04-07 23:59:59">
                     </div>
                     <div class="col-sm-2">
-                        <button type="button" style="margin-left:50px ;margin-top: 16%;" id="btn_query"
+                        <button type="button" style="margin-left:50px ;margin-top: 37px;" id="btn_query"
                                 class="btn btn-info">查询
                         </button>
                     </div>

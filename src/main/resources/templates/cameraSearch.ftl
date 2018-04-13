@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>人像检索</title>
+    <title>通过设备检索</title>
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/cameraSearch.css"/>
     <link rel="stylesheet" href="/static/css/jedate.css"/>
@@ -13,7 +13,8 @@
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
+    <#--<div class="container">-->
+        <div>
         <div class="navbar-header">
             <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar">
                 <span class="sr-only"></span>
@@ -24,8 +25,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="#">预警平台</a></li>
-                <li><a href="../../"><span>|</span>布防管理</a></li>
+                <li><a href="/">预警平台</a></li>
+                <li><a id="register"><span style="margin-left: -15px;">|</span>布防管理</a></li>
                 <li><a href="/anytec/historyManager"><span>|</span>查询历史</a></li>
                 <li class="nav_active"><a href="/anytec/portraitSearch"><span>|</span>人像检索</a></li>
             </ul>
@@ -33,11 +34,11 @@
     </div>
 </nav>
 <div class="left_container">
-    <div class="leftbtn_01">
+    <div class="leftbtn_01" onclick="window.location.href='/anytec/portraitSearch'">
         <a href="/anytec/portraitSearch">人<br>像<br>检<br>索</a>
     </div>
-    <div class="leftbtn_02">
-        <a href="/anytec/camearaSearch">通<br>过<br>设<br>备<br>搜<br>索</a>
+    <div class="leftbtn_02" onclick="window.location.href='/anytec/cameraSearch'">
+        <a href="/anytec/cameraSearch">通<br>过<br>设<br>备<br>搜<br>索</a>
     </div>
 </div>
 <div class="container max_container">
@@ -50,7 +51,7 @@
                 <div class="middle_box">
                     <div class="left_similarity">
                         <div class="left_title">相似度</div>
-                        <div class="left_percentage" id="threshold">75%</div>
+                        <div class="left_percentage" id="threshold">75</div>
                         <div class="left_progress">
                             <div class="progress">
                                 <div class="progress-bar" aria-valuenow="40" aria-valuemax="100" aria-valuemin="0"
@@ -130,20 +131,8 @@
         </div>
     </div>
 </div>
-<div class="bottom_01"></div>
+<#--<div class="bottom_01"></div>-->
 <div class="bottom_02"></div>
-<script>
-    $(function(){
-        $('label').click(function(){
-            $('.event_year>li').removeClass('current');
-            $(this).parent('li').addClass('current');
-            var year = $(this).attr('for');
-            alert(year);
-            $('#'+year).parent().prevAll('div').slideUp(800);
-            $('#'+year).parent().slideDown(800).nextAll('div').slideDown(800);
-        });
-    });
-</script>
 <script type="text/javascript" src="/static/js/jquery.min.js"></script>
 <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/static/js/cameraSearch.js"></script>

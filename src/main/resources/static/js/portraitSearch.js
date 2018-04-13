@@ -9,11 +9,22 @@ $(document).ready(function(){
     	$(this).css("color","red");
     })
 
+    $.ajax({
+        url: "/anytec/getRegisterUrl",
+        type: "post",
+        dataType: "json",
+        success: function (data) {
+            if(data!=null){
+                $("#register").attr("href",data.url);
+            }
+        }
+    });
+
     $("#slider").slider({
         range: "max",
         min: 1,
         max: 100,
-        value: 90,
+        value: 75,
         slide: function( event, ui ) {
             $( "#threshold" ).text( ui.value );
         }
@@ -75,6 +86,8 @@ function portraitSearch() {
     var threshold =$("#threshold").text();
     var startTime = $("#startTime").val();
     var endTime = $("#endTime").val();
+    $("#photoResult").html("");
+    $("#msg").text("");
     if(startTime==""){
         $("#msg").text("搜索开始时间不能为空！");
         return false;

@@ -26,7 +26,8 @@ div,
 input {
 	margin: 0;
 	padding: 0;
-	-webkit-text-size-adjust: none
+	-webkit-text-size-adjust: none;
+	font-family: inherit;
 }
 
 h1,
@@ -44,9 +45,9 @@ a img {
 }
 
 body {
-	color: #333;
-	text-align: center;
-	font: 12px "宋体";
+	font: normal 14px/24px "Helvetica Neue",Helvetica,STheiti,"Microsoft Yahei","冬青黑体简体中文 w3",宋体,Arial,Tahoma,sans-serif,serif;
+	word-wrap: break-word;
+	background: #F0F0F0;
 }
 
 ul,
@@ -141,6 +142,8 @@ a.hScrollPane_rightarrow:hover {
 }
 #gundiv img{
 	border: 1px solid #8C8C8C;
+	height: 80%;
+	width: 80%;
 }
 #gundiv ul {
 	height: 155px;
@@ -156,14 +159,14 @@ a.hScrollPane_rightarrow:hover {
 	margin-right: 17px;
 	position: relative;
 }
-#gundiv li img{
-	height: 80%;
-}
+/*#gundiv li img{*/
+	/*height: 80%;*/
+/*}*/
 #gundiv li p {
 	/*display: none;*/
 	height: 18px;
 	line-height: 18px;
-	text-align: center;
+	/*text-align: center;*/
 	overflow: hidden;
 }
 

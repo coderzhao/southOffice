@@ -23,6 +23,9 @@ public class AppConfig {
     @Value("${app.storage.cutFace}")
     private String cutFace;
 
+    @Value("${app.register.url}")
+    private String registerUrl;
+
     public String getSDKToken() {
         return SDKToken;
     }
@@ -57,5 +60,9 @@ public class AppConfig {
 
     public void setCutFace(String cutFace) {
         this.cutFace = cutFace;
+    }
+
+    public String getRegisterUrl(){
+        return registerUrl;
     }
 }

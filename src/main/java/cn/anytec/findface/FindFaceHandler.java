@@ -392,15 +392,16 @@ public class FindFaceHandler {
         Integer month = (cld.get(Calendar.MONTH)+1);
         Integer day = cld.get(Calendar.DATE);
         for(int i=0;i<photoList.size();i++){
+            Date d = new Date();
             JSONObject indexObj = photoList.get(i);
             JSONObject indexTimeObject = (JSONObject)indexObj.get("timestamp");
             cld.setTime(new Date(Long.parseLong(indexTimeObject.get("$numberLong").toString())));
             Integer indexYear = cld.get(Calendar.YEAR);
             Integer indexMonth = (cld.get(Calendar.MONTH)+1);
             Integer indexDay = cld.get(Calendar.DATE);
-            Integer indexH = cld.get(Calendar.HOUR);
-            Integer indexM = cld.get(Calendar.MINUTE);
-            Integer indexS = cld.get(Calendar.SECOND);
+            Integer indexH = cld.get(Calendar.HOUR_OF_DAY)< 10 ? '0' + cld.get(Calendar.HOUR_OF_DAY) : cld.get(Calendar.HOUR_OF_DAY);
+            Integer indexM = cld.get(Calendar.MINUTE)< 10 ? '0' + cld.get(Calendar.MINUTE) : cld.get(Calendar.MINUTE);
+            Integer indexS = cld.get(Calendar.SECOND)< 10 ? '0' + cld.get(Calendar.SECOND) : cld.get(Calendar.SECOND);
             String indexTime = indexH+ ":"+ indexM + ":"+indexS;
             indexObj.put("time",indexTime);
             indexObj.put("year",indexYear);
@@ -453,69 +454,4 @@ public class FindFaceHandler {
         }
         return resultList;
     }
-
-
-
-//    public JSONObject getPhotoResult(List<JSONObject> reusltList) {
-//        JSONObject mjo = new JSONObject();
-//        JSONObject yjo = new JSONObject();
-//        JSONObject jo = new JSONObject();
-//        Map<String,Object> timeMap = new HashMap<>();
-//        Calendar cld = Calendar.getInstance();
-//        cld.setTime((Date)reusltList.get(0).get("date"));
-//        Integer year = cld.get(Calendar.YEAR);
-//        Integer month = (cld.get(Calendar.MONTH)+1);
-//        Integer day = cld.get(Calendar.DATE);
-//        for(int i=0;i<reusltList.size();i++){
-//            cld.setTime((Date)reusltList.get(i).get("date"));
-//            Integer indexYear = cld.get(Calendar.YEAR);
-//            Integer indexMonth = (cld.get(Calendar.MONTH)+1);
-//            Integer indexDay = cld.get(Calendar.DATE);
-//            Integer indexH = cld.get(Calendar.HOUR);
-//            Integer indexM = cld.get(Calendar.MINUTE);
-//            Integer indexS = cld.get(Calendar.SECOND);
-//            String indexTime = indexH+ ":"+ indexM + ":"+indexS;
-//            if (indexYear.equals(year)) {
-//                if (indexMonth.equals(month)) {
-//                    if (indexDay.equals(day)) {
-//                        timeMap.put("time",indexTime);
-//                        timeMap.put("photo",reusltList.get(i).get("photo"));
-//                    } else {
-//                        mjo.put(day,timeMap);
-//                        timeMap.clear();
-//                        timeMap.put("time",indexTime);
-//                        timeMap.put("photo",reusltList.get(i).get("photo"));
-//                        day = indexDay;
-//                    }
-//                } else {
-//                    mjo.put(day,timeMap);
-//                    yjo.put(month,mjo);
-//                    timeMap.clear();
-//                    mjo.clear();
-//                    timeMap.put("time",indexTime);
-//                    timeMap.put("photo",reusltList.get(i).get("photo"));
-//                    day = indexDay;
-//                    month = indexMonth;
-//                }
-//            } else {
-//                mjo.put(day,timeMap);
-//                yjo.put(month,mjo);
-//                jo.put(year,yjo);
-//                timeMap.clear();
-//                mjo.clear();
-//                yjo.clear();
-//                timeMap.put("time",indexTime);
-//                timeMap.put("photo",reusltList.get(i).get("photo"));
-//                day = indexDay;
-//                month = indexMonth;
-//                year = indexYear;
-//            }
-//            if(i==reusltList.size()-1){
-//                mjo.put(day,timeMap);
-//                yjo.put(month,mjo);
-//                jo.put(year,yjo);
-//            }
-//        }
-//        return jo;
-//    }
 }

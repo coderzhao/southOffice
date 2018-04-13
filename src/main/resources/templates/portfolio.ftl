@@ -24,11 +24,20 @@
             background-color: #f2f2f2;
             padding: 25px;
         }
+        .navbar-nav li a{
+            font-size:2.5vmin;
+            color:white !important;
+            font-family: 微软雅黑;
+            text-align: left;
+        }
+        .nav_active a {
+            font-size: 3.5vmin !important;
+        }
     </style>
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
+<#--<nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -44,12 +53,35 @@
                 <li><a href="/anytec/historyManager" target="view_window">查询历史</a></li>
                 <li><a href="/anytec/portraitSearch" target="_blank">人像检索</a></li>
             </ul>
-            <#--<ul class="nav navbar-nav navbar-right">-->
-                <#--<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>-->
-            <#--</ul>-->
+            &lt;#&ndash;<ul class="nav navbar-nav navbar-right">&ndash;&gt;
+                &lt;#&ndash;<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>&ndash;&gt;
+            &lt;#&ndash;</ul>&ndash;&gt;
+        </div>
+    </div>
+</nav>-->
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <#--<div class="container">-->
+        <div>
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only"></span>
+                <span class="icon-bar "></span>
+                <span class="icon-bar "></span>
+                <span class="icon-bar "></span>
+            </button>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="nav_active"><a href="/" style="margin-right: -15px;">预警平台</a></li>
+                <li><a id="register" style="margin-right: -20px;"><span style="padding-right: 15px;">|</span>布防管理</a></li>
+                <li><a href="/anytec/historyManager" style="margin-right: -20px;"><span style="padding-right: 15px;">|</span>查询历史</a></li>
+                <li><a href="/anytec/portraitSearch" style="margin-right: -20px;"><span style="padding-right: 15px;">|</span>人像检索</a></li>
+            </ul>
         </div>
     </div>
 </nav>
+
 
 <div class="jumbotron">
     <div class="container text-center">

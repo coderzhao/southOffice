@@ -177,6 +177,14 @@ public class MainController implements EmbeddedServletContainerCustomizer {
         return cameraList;
     }
 
+    @RequestMapping(value = "/anytec/getRegisterUrl")
+    @ResponseBody
+    public JSONObject getRegisterUrl() {
+        JSONObject result = new JSONObject();
+        result.put("url",appConfig.getRegisterUrl());
+        return result;
+    }
+
     @RequestMapping(value = "/anytec/imageSearch")
     @ResponseBody
     public List<JSONObject> imageSearch(@RequestParam("threshold") String threshold,@RequestParam("startTime") String startTime,
@@ -196,7 +204,7 @@ public class MainController implements EmbeddedServletContainerCustomizer {
                                         @RequestParam("endTime") String endTime,@RequestParam("camera") String camera){
         Double thresholdValue=Double.parseDouble(threshold);
         List<JSONObject> jsonObjectList = mongoDB.getFaceByCamera(thresholdValue,camera,startTime,endTime);
-        if (jsonObjectList == null){
+        if (jsonObjectList== null||jsonObjectList.size()==0){
             return null;
         }
         return findFaceHandler.getPhotoResults(jsonObjectList);

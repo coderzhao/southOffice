@@ -7,13 +7,14 @@
 		<link rel="stylesheet" href="/static/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="/static/css/cameraSearch.css" />
 		<link rel="stylesheet" href="/static/css/jedate.css" />
-		<link rel="stylesheet" href="/static/css/datouwang.css" />
+		<link rel="stylesheet" href="/static/css/portraitSearch.css" />
         <link rel="stylesheet" href="/static/css/jquery-ui.min.css"/>
 
 	</head>
 	<body>
 		<nav class="navbar navbar-inverse navbar-fixed-top">
-			<div class="container">
+			<#--<div class="container">-->
+				<div>
 				<div class="navbar-header">
 					<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar">
 		   				<span class="sr-only"></span>
@@ -25,7 +26,7 @@
 		   		<div id="navbar" class="navbar-collapse collapse">
 		   			<ul class="nav navbar-nav">
 		   				<li><a href="/">预警平台</a></li>
-		   				<li><a href="protection"><span>|</span>布防管理</a></li>
+		   				<li><a id="register"><span>|</span>布防管理</a></li>
 		   				<li><a href="/anytec/historyManager"><span>|</span>查询历史</a></li>
 		   				<li  class="nav_active"><a href="/anytec/portraitSearch"><span>|</span>人像检索</a></li>
 		   			</ul>
@@ -33,10 +34,10 @@
 		   	</div>
 		</nav>
 		<div class="left_container">
-			<div class="leftbtn_01_1">
+			<div class="leftbtn_01_1" onclick="window.location.href='/anytec/portraitSearch'">
 				<a href="/anytec/portraitSearch">人<br>像<br>检<br>索</a>
 			</div>
-			<div class="leftbtn_02_1">
+			<div class="leftbtn_02_1" onclick="window.location.href='/anytec/cameraSearch'">
 				<a href="/anytec/cameraSearch">通<br>过<br>设<br>备<br>搜<br>索</a>
 			</div>
 		</div>
@@ -50,7 +51,7 @@
 						<div class="middle_box">
 							<div class="left_similarity">
                                 <div class="left_title">相似度</div>
-                                <div class="left_percentage" id="threshold">75%</div>
+                                <div class="left_percentage" id="threshold">75</div>
                                 <div class="left_progress">
                                     <div class="progress">
                                         <div class="progress-bar" aria-valuenow="40" aria-valuemax="100" aria-valuemin="0"
