@@ -12,7 +12,8 @@
 				mover=container.find(settings.mover),
 				w=500,
 				c=settings.moverW || mover.width(),
-				dragbar=(container.find(".hScrollPane_dragbar").length==0 && c>w ) ? container.append('<div class="hScrollPane_dragbar"><div class="hScrollPane_draghandle"></div></div>').find(".hScrollPane_dragbar") : container.find(".hScrollPane_dragbar"),
+				// dragbar=(container.find(".hScrollPane_dragbar").length==0 && c>w ) ? container.append('<div class="hScrollPane_dragbar"><div class="hScrollPane_draghandle"></div></div>').find(".hScrollPane_dragbar") : container.find(".hScrollPane_dragbar"),
+				dragbar=(container.find(".hScrollPane_dragbar").length==0) ? container.append('<div class="hScrollPane_dragbar"><div class="hScrollPane_draghandle"></div></div>').find(".hScrollPane_dragbar") : container.find(".hScrollPane_dragbar"),
 				handle=dragbar.find(".hScrollPane_draghandle");
 			
 			if(settings.showArrow){

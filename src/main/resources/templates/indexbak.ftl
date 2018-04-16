@@ -62,7 +62,7 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li><a href="http://u1961b1648.51mypc.cn:24850" target="view_window">布防管理</a></li>
-                <li><a href="/anytec/historyManager.html" target="view_window">查询历史</a></li>
+                <li><a href="/anytec/historyManager" target="view_window">查询历史</a></li>
             </ul>
         <#--<ul class="nav navbar-nav navbar-right">-->
         <#--<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>-->

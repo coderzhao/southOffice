@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
+import java.util.regex.Pattern;
 
 import static com.mongodb.client.model.Filters.*;
 
@@ -68,6 +69,8 @@ public class MongoDB {
         Integer limit = 10;
         String meta = "";
         String camera = "";
+        String startTime="";
+        String endTime="";
         if (params.containsKey("offset")) {
             offset = Integer.parseInt(params.get("offset")[0]);
         }
@@ -84,9 +87,31 @@ public class MongoDB {
             camera = params.get("camera")[0];
         }
 
+        if (params.containsKey("startTime")) {
+            startTime = params.get("startTime")[0];
+        }
+
+        if (params.containsKey("endTime")) {
+            endTime = params.get("endTime")[0];
+        }
+
+        BasicDBObject dbObject = new BasicDBObject();
+        if (!startTime.equals("")) {
+            if (!endTime.equals("")) {
+                String format ="yyyy-MM-dd HH:mm:ss";
+                SimpleDateFormat sdf = new SimpleDateFormat(format);
+                try {
+                    Long start=sdf.parse(startTime).getTime();
+                    Long end =sdf.parse(endTime).getTime();
+                    dbObject.put("timestamp", new BasicDBObject().append("$gte", start).append("$lte", end));
+                } catch (java.text.ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        Pattern metaPattern = Pattern.compile("^.*"+meta+".*$");
         if (!meta.equals("") && !camera.equals("")) {
-            BasicDBObject dbObject = new BasicDBObject();
-            dbObject.put("meta", meta);
+            dbObject.put("meta", metaPattern);
             dbObject.put("camera", camera);
             FindIterable<Document> documents = faceCollection.find(dbObject).skip(limit * offset).limit(limit).sort(new BasicDBObject("timestamp",-1));
             if (null == documents) {
@@ -94,14 +119,16 @@ public class MongoDB {
             }
             return getResultJson(documents);
         } else if (!meta.equals("")) {
-            FindIterable<Document> documents = faceCollection.find(eq("meta", meta)).skip(limit * offset).limit(limit).sort(new BasicDBObject("timestamp",-1));
+            dbObject.put("meta", metaPattern);
+            FindIterable<Document> documents = faceCollection.find(dbObject).skip(limit * offset).limit(limit).sort(new BasicDBObject("timestamp",-1));
             if (null == documents.first())
-                documents = faceCollection.find(eq("meta", meta)).limit(limit).sort(new BasicDBObject("timestamp",-1));
+                documents = faceCollection.find(dbObject).limit(limit).sort(new BasicDBObject("timestamp",-1));
             return getResultJson(documents);
         } else if (!camera.equals("")) {
-            FindIterable<Document> documents = faceCollection.find(eq("camera", camera)).skip(limit * offset).limit(limit);
+            dbObject.put("camera",camera);
+            FindIterable<Document> documents = faceCollection.find(dbObject).skip(limit * offset).limit(limit);
             if (null == documents.first())
-                documents = faceCollection.find(eq("camera", camera)).limit(limit).sort(new BasicDBObject("timestamp",-1));
+                documents = faceCollection.find(dbObject).limit(limit).sort(new BasicDBObject("timestamp",-1));
             return getResultJson(documents);
         }
         return getResultJson(faceCollection.find().skip(limit * offset).limit(limit).sort(new BasicDBObject("timestamp",-1)));
@@ -147,8 +174,8 @@ public class MongoDB {
 
         if (!startTime.equals("")) {
             if (!endTime.equals("")) {
-                startTime = startTime+" 00:00:00";
-                endTime = endTime+" 23:59:59";
+//                startTime = startTime+" 00:00:00";
+//                endTime = endTime+" 23:59:59";
                 String format ="yyyy-MM-dd HH:mm:ss";
                 SimpleDateFormat sdf = new SimpleDateFormat(format);
                 try {
@@ -166,6 +193,14 @@ public class MongoDB {
         }
         return getResultJson(documents);
     }
+
+    public List<JSONObject> getFaceByCamera(Double threshold, String camera, String startTime, String endTime) {
+        List<JSONObject> objList = getFace(threshold,camera,startTime,endTime);
+
+        return objList;
+    }
+
+
 
 
     public List<String> getCamera(){

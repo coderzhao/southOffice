@@ -1,3 +1,15 @@
+$(document).ready(function () {
+    $.ajax({
+        url: "/anytec/getRegisterUrl",
+        type: "post",
+        dataType: "json",
+        success: function (data) {
+            if (data != null) {
+                $("#register").attr("href", data.url);
+            }
+        }
+    });
+})
 function showImageDetail(obj) {
     imgShow("#outerdiv", "#innerdiv", "#bigimg", obj);
 }

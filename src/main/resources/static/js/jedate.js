@@ -670,16 +670,30 @@
 })(window);
 
 jeDate({
-	dateCell:"#dateinfo",
+	dateCell:"#startTime",
 	format:"YYYY-MM-DD hh:mm:ss",
 	isinitVal:true,
 	isTime:true, //isClear:false,
 	minDate:"2014-09-19 00:00:00"
 })
 jeDate({
-	dateCell:"#dateinfo2",
+	dateCell:"#endTime",
 	format:"YYYY-MM-DD hh:mm:ss",
 	isinitVal:true,
 	isTime:true, //isClear:false,
 	minDate:"2014-09-19 00:00:00"
+})
+jeDate({
+    dateCell:"#start",
+    format:"YYYY-MM-DD hh:mm:ss",
+    isinitVal:true,
+    isTime:true, //isClear:false,
+    minDate:"2014-09-19 00:00:00"
+})
+jeDate({
+    dateCell:"#end",
+    format:"YYYY-MM-DD hh:mm:ss",
+    isinitVal:true,
+    isTime:true, //isClear:false,
+    minDate:"2014-09-19 00:00:00"
 })

@@ -5,8 +5,8 @@ html,body{
 }
 body{
 	position: relative;
-   margin: 0;
-   padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 .navbar-header button{
@@ -18,23 +18,28 @@ body{
 .navbar-nav li a{
 	font-size:2.5vmin;
 	color:white !important;
+	font-family: 微软雅黑;
+	text-align: left;
 }
-/*ul li:last-child a 
+/*ul li:last-child a
 {
    font-size:3.5vmin;
 }*/
 .nav_active a{
 	font-size:3.5vmin !important;
 }
-ul li:last-child a span 
+ul li:last-child a span
 {
-   font-size:30px !important;
+	font-size:30px !important;
 }
 @media screen and (min-width:0px) and (max-width:769px){
 	.navbar-nav span{
 		display: none;
-      }
 	}
+	.time_container{
+		margin-bottom: 35%;
+	}
+}
 @media screen and (min-width:769px) and (max-width:2500px) {
 	.navbar-nav span{
 		display: block;
@@ -43,17 +48,17 @@ ul li:last-child a span
 		margin-left:-15px;
 		margin-right:15px;
 		float:left;
-      }
 	}
+}
 .left_container{
 	position: fixed;
 	top: 12%;
 	width: 10%;
 	height: 70%;
-	}
+}
 .left_container a{
-		text-decoration: none;
-	}
+	text-decoration: none;
+}
 .max_container{
 	position: absolute;
 	top: 12%;
@@ -62,12 +67,12 @@ ul li:last-child a span
 	height: 70%;
 }
 .row{
-		height: 100%;
-	}
+	height: 100%;
+}
 .col_01{
-     height: 100%;
-		 
-	}
+	height: 100%;
+
+}
 .bottom_01{
 	width: 100%;
 	height: 1%;
@@ -99,14 +104,14 @@ ul li:last-child a span
 	font-family: 微软雅黑;
 	background-color: #ec6941;
 	max-width: 65px;
-	height: 30%;
+	height: 35%;
 	width: 100%;
 	text-align: center;
 	position: relative;
 	border-top-right-radius: 15px;
 	border-bottom-right-radius: 15px;
-    box-shadow: 5px 5px 5px #4e4d4d;
-    cursor: pointer;
+	box-shadow: 5px 5px 5px #4e4d4d;
+	cursor: pointer;
 }
 .leftbtn_01 a,.leftbtn_02_1 a{
 	font-size: 2.6vmin;
@@ -164,7 +169,7 @@ ul li:last-child a span
 	width: 100%;
 	height: 100%;
 	background-color:#e5e5e5;
-    padding-bottom: 50px;
+	min-width: 300px;
 }
 .top_box{
 	width: 100%;
@@ -183,16 +188,16 @@ ul li:last-child a span
 	background-color: #e5e5e5;
 }
 .top_btn{
-    width: 90%;
-    height: 50%;
-    padding-top: 0.5%;
-    background-color: #ec6941;
-    position: absolute;
-    top: 25%;
-    left: 5%;
-    font-size: 2.5vmin;
-    color: white;
-    text-align: center;
+	width: 90%;
+	height: 50%;
+	padding-top: 0.5%;
+	background-color: #ec6941;
+	position: absolute;
+	top: 25%;
+	left: 5%;
+	font-size: 2.5vmin;
+	color: white;
+	text-align: center;
 }
 .left_similarity{
 	width: 40%;
@@ -220,10 +225,11 @@ ul li:last-child a span
 }
 .left_percentage{
 	width: 100%;
-	height: 40%;
+	height: 25%;
 	color: #ec6941;
 	font-size: 6vmin;
 	text-align: center;
+	margin-top: 10%;
 }
 
 .left_progress{
@@ -237,14 +243,13 @@ ul li:last-child a span
 .progress-bar{
 	background-color: #ec6941;
 }
-#slider .ui-slider-range { background: #ec6941; }
 .start_date,.end_date{
 	width: 100%;
 	height: 30%;
-	font-size: 3vmin;
+	font-size: 2.5vmin;
 	color: #ec6941;
 	font-weight: 900;
-	padding-top: 3%;
+	padding-top: 5%;
 }
 .bottom_choose{
 	width: 100%;
@@ -351,7 +356,6 @@ ul li:last-child a span
 .date_videoBox{
 	width: 40%;
 	height: 100%;
-	border: 1px solid red;
 	position: relative;
 }
 .date_box01{
@@ -446,9 +450,9 @@ ul li:last-child a span
 	width: 90%;
 	margin-left: 5%;
 	border-left: 2px dashed #ec6941;
-    padding-left: 3%;
-    padding-bottom: 30px;
-    position:relative;
+	padding-left: 3%;
+	padding-bottom: 30px;
+	position:relative;
 }
 .day01{
 	margin-top: 50px;
@@ -472,47 +476,48 @@ ul li:last-child a span
 	color: #ec6941;
 }
 .day_digital{
-    position: absolute;
-    top: -30px;
-    left: -20px;
-    width: 40px;
-    height: 40px;
-    text-align:center;
-    line-height:40px;
-    font-size:3vmin;
-    border: 1px solid red;
-    background-color: white;
-    border-radius: 50%;
-    color:#ec6941;
+	position: absolute;
+	top: -30px;
+	left: -20px;
+	width: 40px;
+	height: 40px;
+	text-align:center;
+	line-height:40px;
+	font-size:3vmin;
+	border: 1px solid red;
+	background-color: white;
+	border-radius: 50%;
+	color:#ec6941;
 }
 .bottom_time{
-    width: 100%;
-    height: 85%;
-    overflow:auto;
+	width: 100%;
+	height: 85%;
+	overflow:auto;
 }
 .bottom_time .time_day:last-child{ /*最后一个 class为a 的元素*/
-        border-left: none;
+	border-left: none;
 }
 .sart_text{
-    float: left;
-    margin-right: 1%;
-    width: 19%;
+	float: left;
+	margin-right: 1%;
+	width: 19%;
 }
 input#J-xl ,input#J-xl2{
-    width: 100%;
-    height: 35px;
-    color: #5c5c5c;
-    font-weight: 500;
-    font-size: 2.5vmin;
+	width: 100%;
+	height: 35px;
+	color: #5c5c5c;
+	font-weight: 500;
+	font-size: 2.5vmin;
 }
 .demo1 {
-    width: 80%;
-    height: 20px;
-    float: left;
-}	
+	width: 80%;
+	height: 20px;
+	float: left;
+	color: #5c5c5c;
+}
 .time_box01{
 	height: 100%;
-    position: relative;
+	position: relative;
 }
 .timeinput_01{
 	width: 100%;
@@ -523,14 +528,14 @@ input#J-xl ,input#J-xl2{
 #J-xl_01{
 	width: 100%;
 	padding-right:20px;
-    background: url(../img/dateicon.png) no-repeat scroll right center transparent;  
-    background-color: white;
+	background: url(../img/dateicon.png) no-repeat scroll right center transparent;
+	background-color: white;
 }
 #J-xl_02{
 	width: 100%;
 	padding-right:20px;
-    background: url(../img/dateicon.png) no-repeat scroll right center transparent;  
-    background-color: white;
+	background: url(../img/dateicon.png) no-repeat scroll right center transparent;
+	background-color: white;
 }
 .inputborder{
 	width: 100%;
@@ -555,7 +560,7 @@ input#J-xl ,input#J-xl2{
 }
 .setup_box .col-lg-6{
 	height: 100%;
-	
+
 }
 .setup_container{
 	width: 100%;
@@ -612,10 +617,10 @@ input#J-xl ,input#J-xl2{
 	background-color: #535353;
 }
 .cell{
-   display:table-cell;
-   vertical-align:middle;
-   width:100%;
-   height:100%;
+	display:table-cell;
+	vertical-align:middle;
+	width:100%;
+	height:100%;
 }
 .upload_icon{
 	height: 100%;
@@ -668,8 +673,8 @@ input#J-xl ,input#J-xl2{
 }
 .left_percentage1{
 	width: 60%;
-    height: 100%;
-    float: left;
+	height: 100%;
+	float: left;
 	color: #ec6941;
 	font-size: 6vmin;
 	text-align: center;
@@ -687,9 +692,9 @@ input#J-xl ,input#J-xl2{
 	background-color:#01AAED;
 }
 .top_percentage{
-    width: 100%;
-    text-align: center;
-    height: 75%;
+	width: 100%;
+	text-align: center;
+	height: 75%;
 }
 .bottom_percentage{
 	width: 100%;
@@ -707,19 +712,19 @@ input#J-xl ,input#J-xl2{
 	text-align: center;
 	position: absolute;
 	display: table;
-    width: 100%;
-    height: 100%;
+	width: 100%;
+	height: 100%;
 }
 .percentage_text{
-   display:table-cell;
-   vertical-align:middle;
-   color: #0068b7;
+	display:table-cell;
+	vertical-align:middle;
+	color: #0068b7;
 }
 .percentage_box{
 	width: 60%;
-    height: 80%;
-     position: absolute; 
-     top: 10%; 
+	height: 80%;
+	position: absolute;
+	top: 10%;
 }
 .left_timeBox{
 	width: 20%;
@@ -800,12 +805,10 @@ input#J-xl ,input#J-xl2{
 	height: 50%;
 }
 .top_collectionsBox{
-	border: 1px solid red;
 	width: 100%;
 	height: 20%;
 }
 .bottom_collectionsBox{
-	border: 1px solid red;
 	width: 100%;
 	height: 80%;
 }
@@ -913,10 +916,7 @@ input::-webkit-input-placeholder{
 }
 .table_box table{
 	width: 100%;
-    border: 1px solid #7e7d7d;
-}
-.table_box table tr{
-	border-bottom: 1px solid red;
+	border: 1px solid #7e7d7d;
 }
 .one_th,.one_td{
 	text-align: center;
@@ -950,34 +950,34 @@ input::-webkit-input-placeholder{
 .td_portrait{
 	margin-top: 5%;
 	margin-bottom: 5%;
-	max-height: 100px;
+	/*max-height: 100px;*/
 }
 .two_table img{
-	width: 100px;
-	height: 100px;
+	width: 80%;
+	max-width: 100px;
 }
 /*遮罩层以及弹出框*/
 .mask{
 	position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1040;
-    background-color: #000;
-    display: none;
-    opacity: 0.6;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1040;
+	background-color: #000;
+	display: none;
+	opacity: 0.6;
 }
 .add_pop-up{
-    position: fixed;
-    top: 20%;
-    left: 30%;
-    width: 40%;
-    height: 60%;
-    border: 4px solid #535353;
-    background-color: #e5e5e5;
-    display: none;
-    z-index: 9999;
+	position: fixed;
+	top: 20%;
+	left: 30%;
+	width: 40%;
+	height: 60%;
+	border: 4px solid #535353;
+	background-color: #e5e5e5;
+	display: none;
+	z-index: 9999;
 }
 .pop-upTitle{
 	width: 100%;
@@ -1014,7 +1014,7 @@ input::-webkit-input-placeholder{
 	height: 100%;
 	display: table-cell;
 	vertical-align: middle;
-	
+
 }
 .shut_down{
 	height: 100%;
@@ -1205,4 +1205,31 @@ input::-webkit-input-placeholder{
 }
 .addimg_border{
 	border: 4px solid red !important;
+}
+.pro_container{
+	width: 100% !important;
+}
+.pro_navbar{
+	width: 90% !important;
+	margin-left: 4% !important;
+}
+
+.msg_font{
+	float: left;
+	margin-left: 5%;
+	margin-top: 12px;
+	font-size: 2.5vmin;
+	font-family: 微软雅黑;
+}
+.button_font{
+	float: left;
+	margin-left: 5%;
+	font-size: 1.5vmin;
+	font-family: 微软雅黑;
+	margin-top: 10%;
+	margin-left: 15%;
+}
+.slidercolor{
+	background: #ec6941 !important;
+	height: 100% !important;
 }
