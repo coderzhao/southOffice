@@ -123,11 +123,7 @@ var TableInit = function () {
                     title: '时间',
                     formatter: function (value, row, index) {
                         var t = parseInt(row.timestamp.$numberLong);
-//                                var d =new Date(t);
-//                                d.setTime(t);
-//                                var s =d.format('yyyy-MM-dd HH-mm-ss');
                         return timetrans(t);
-//                                return row.timestamp;
                     }
                 }
             ],

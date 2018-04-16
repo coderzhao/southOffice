@@ -59,6 +59,8 @@ public class FindFaceHandler {
         String token=params.get("token")[0];
         String Lat ="";
         String Lng ="";
+        String time="";
+        Date date =new Date();
 
         if(params.containsKey("threshold")){
             multipartEntityBuilder.addTextBody("threshold",params.get("threshold")[0]);
@@ -70,6 +72,20 @@ public class FindFaceHandler {
 
         if(params.containsKey("Lng")){
            Lng = params.get("Lng")[0];
+        }
+
+        if(params.containsKey("time")){
+            time=params.get("time")[0];
+            if(time.length()==14){
+                time=time.substring(0,4)+"-"+time.substring(4,6)+"-"+time.substring(6,8)+" "
+                        +time.substring(8,10)+":"+time.substring(10,12)+":"+time.substring(12,14);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                try {
+                    date = sdf.parse(time);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
 //        if(params.containsKey("mf_selector"))
@@ -162,7 +178,9 @@ public class FindFaceHandler {
                         faceInfo.put("id",face.get("id"));
                         faceInfo.put("meta",face.get("meta"));
                         faceInfo.put("friend",face.get("friend"));
-                        faceInfo.put("timestamp",new Date().getTime());
+//                        faceInfo.put("timestamp",new Date().getTime());
+                        faceInfo.put("timestamp",date.getTime());
+                        faceInfo.put("time",time);
                         faceInfo.put("face",appConfig.getURI()+cutFacePathAndName);
 //                        faceInfo.put("photo","http://u1961b1648.51mypc.cn:13319/static/resource/"+camera+"/"+picId+""+String.valueOf(i)+".jpg");
                         faceInfo.put("photo", appConfig.getURI() + drawFacePathAndName);
