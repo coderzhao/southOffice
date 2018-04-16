@@ -58,6 +58,7 @@ function locationMap(longitude,latitude) {
         center: [longitude,latitude]
         //center: [116.39,39.9]
     });
+    var lnglat =[longitude,latitude];
     AMap.plugin('AMap.Geocoder', function () {
         var geocoder = new AMap.Geocoder({
             //city: "010"//城市，默认：“全国”
@@ -67,6 +68,12 @@ function locationMap(longitude,latitude) {
             map: map,
             bubble: true
         })
+        marker.setPosition(lnglat);
+        geocoder.getAddress(lnglat, function (status, result) {
+            if (status == 'complete') {
+                document.getElementById('input').value = result.regeocode.formattedAddress
+            }
+        });
         map.on('click', function (e) {
             marker.setPosition(e.lnglat);
             geocoder.getAddress(e.lnglat, function (status, result) {

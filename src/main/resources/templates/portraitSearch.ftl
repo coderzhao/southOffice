@@ -89,6 +89,7 @@
 								<div id="msg" class="msg_font"></div>
 								<div class="btn_box01">
 									<div class="btn_01_1">
+										<#--<img src="/static/img/icon_01.png" onclick="portraitSearch()">-->
 										<img src="/static/img/icon_01.png" onclick="portraitSearch()">
 									</div>
 									<#--<div class="btn_02_1">-->
