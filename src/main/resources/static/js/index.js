@@ -90,7 +90,8 @@ $(document).ready(function () {
                             '<div class="col-xs-12">' +
                                 '<p>相似度:' + singleFace["confidence"] + '</p>' +
                                 '<p>姓名:' + singleFace["meta"] + '</p>' +
-                                '<p>时间:' + timetrans(parseInt(singleFace["timestamp"])) + '</p>' +
+                                // '<p>时间:' + timetrans(parseInt(singleFace["timestamp"])) + '</p>' +
+                                '<p>时间:' + singleFace["time"]+ '</p>' +
                                 '<p>摄像头:' + singleFace["camera"] + '</p>' +
                             '</div>' +
                         '</div>'
