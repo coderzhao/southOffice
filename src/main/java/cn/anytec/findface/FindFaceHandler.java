@@ -62,9 +62,9 @@ public class FindFaceHandler {
         String time="";
         Date date =new Date();
 
-        if(params.containsKey("threshold")){
-            multipartEntityBuilder.addTextBody("threshold",params.get("threshold")[0]);
-        }
+//        if(params.containsKey("threshold")){
+//            multipartEntityBuilder.addTextBody("threshold",params.get("threshold")[0]);
+//        }
 
         if(params.containsKey("Lat")){
            Lat=params.get("Lat")[0];
