@@ -43,7 +43,7 @@ $(document).ready(function(){
 
 $("#zsgun").hScrollPane({
     mover:"ul",
-    moverW:function(){return $("#zsgun li").length*172-17;}(),
+    moverW:function(){return $("#zsgun li").length*430;}(),
     showArrow:true,
     handleCssAlter:"draghandlealter"
 });
@@ -121,17 +121,25 @@ function portraitSearch() {
         processData: false,
         contentType: false,
         success: function (data) {
+            var content;
             if(data.length>0){
                 $("#msg").text("查询结果如下：");
                 for(var index in data){
-               // <li><img src="/static/img/img02.jpg" alt="" width="153" height="153"/><a><p>13时4分58秒</a></p></li>
-                    $("#photoResult").append("<li> <img alt='' src='"+data[index]["face"]+"' width='153' height='153' onclick='locationMap("+data[index]['longitude']+","+data[index]['latitude']+")'/>"+
-                        "<a><p>"+timetrans(data[index]['timestamp'].$numberLong)+"</p></a></li>");
+                    content += "<li><div class='li_maxbox' onclick='locationMap("+data[index]['longitude']+","+data[index]['latitude']+")'>" +
+                        "<div class='li_box'><img alt='' src='"+data[index]["face"]+"' width='153' height='153'/>"
+                        +"<p style='width:95px;'>切出人脸图</p></div>";
+                    content += "<div class='li_box'><img alt='' src='"+data[index]["matchFace"]+"' width='153' height='153'/>"
+                        +"<p style='width:95px;'>库中图</p></div>";
+                    content += "<div class='li_box li_box3'><img alt='' src='"+data[index]["photo"]+"' width='153' height='153'/>"
+                        +"<p style='width:95px;'>原图</p></div>";
+                    content += "<div class='li_textBox'><p style='text-align: left;margin-left: 30px;margin-top: 8px;'>姓名:"+data[index]["meta"]+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;相似度:"+data[index]["confidence"]+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;摄像头:"+data[index]["camera"]+"</p>"
+                        +"<p>时间："+timetrans(data[index]['timestamp'].$numberLong)+"</p></div></li>";
                 }
-                $("#gundiv ul").css("width",172 * (data.length));
+                $("#photoResult").append(content);
+                $("#gundiv ul").css("width",417 * (data.length));
                 $("#zsgun").hScrollPane({
                     mover:"ul",
-                    moverW:function(){return $("#zsgun li").length*172-17;}(),
+                    moverW:function(){return $("#zsgun li").length*430;}(),
                     showArrow:true,
                     handleCssAlter:"draghandlealter"
                 });

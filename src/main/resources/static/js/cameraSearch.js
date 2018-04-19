@@ -159,9 +159,17 @@ function cameraSearch() {
                             content = " <div><h3 id='" + indexYear + indexMonth + "'>" + indexYear + "年" + indexMonth + "月" + "</h3>";
                             content += "<li><span>" + jsonobj[prop][0]["day"] + "日</span><div class='imgbox'>";
                             for (var key in jsonobj[prop]) {
-                                content += "<div class='imgminbox'><div class='event_img'>" +
+                                content += "<div class='maxbox_grouping'><div class='box_grouping'><div class='imgminbox'><div class='event_img'>" +
                                     "<img src='" + jsonobj[prop][key]["face"] + "'/></div>" +
-                                    "<div class='event_text'>" + jsonobj[prop][key]["time"] + "</div></div>";
+                                    "<div class='event_text'>切出人脸图</div></div>";
+                                content += "<div class='imgminbox'><div class='event_img'>" +
+                                    "<img src='" + jsonobj[prop][key]["matchFace"] + "'/></div>" +
+                                    "<div class='event_text'>库中图</div></div>";
+                                content += "<div class='imgminbox'><div class='event_img'>" +
+                                    "<img src='" + jsonobj[prop][key]["photo"] + "'/></div>" +
+                                    "<div class='event_text'>原图</div></div>";
+                                content += "<div class='img_textBox'><div class='img_text'>时间："+jsonobj[prop][key]["time"]+"&nbsp;&nbsp; 姓名："+jsonobj[prop][key]["meta"]+"</div>"
+                                    +"<div class='img_text'>摄像机："+jsonobj[prop][key]["camera"]+"&nbsp; 相似度："+jsonobj[prop][key]["confidence"]+"</div></div></div></div>";
                             }
                             content += "</div></li>";
                         }
@@ -178,9 +186,17 @@ function cameraSearch() {
                                 content += "<li><span>" + jsonobj[prop][0]["day"] + "日</span><div class='imgbox'>";
                             }
                             for (var key in jsonobj[prop]) {
-                                content += "<div class='imgminbox'><div class='event_img'>" +
+                                content += "<div class='maxbox_grouping'><div class='box_grouping'><div class='imgminbox'><div class='event_img'>" +
                                     "<img src='" + jsonobj[prop][key]["face"] + "'/></div>" +
-                                    "<div class='event_text'>" + jsonobj[prop][key]["time"] + "</div></div>";
+                                    "<div class='event_text'>切出人脸图</div></div>";
+                                content += "<div class='imgminbox'><div class='event_img'>" +
+                                    "<img src='" + jsonobj[prop][key]["matchFace"] + "'/></div>" +
+                                    "<div class='event_text'>库中图</div></div>";
+                                content += "<div class='imgminbox'><div class='event_img'>" +
+                                    "<img src='" + jsonobj[prop][key]["photo"] + "'/></div>" +
+                                    "<div class='event_text'>原图</div></div>";
+                                content += "<div class='img_textBox'><div class='img_text'>时间："+jsonobj[prop][key]["time"]+"&nbsp;&nbsp; 姓名："+jsonobj[prop][key]["meta"]+"</div>"
+                                    +"<div class='img_text'>摄像机："+jsonobj[prop][key]["camera"]+" &nbsp;相似度："+jsonobj[prop][key]["confidence"]+"</div></div></div></div>";
                             }
                             content += "</div></li>";
                         }

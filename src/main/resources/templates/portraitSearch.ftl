@@ -106,16 +106,6 @@
 										<#--<li><img src="/static/img/img01.jpg" alt="大头网网页特效" width="153" height="153"/><p>13时4分58秒</a></p></li>-->
 										<#--<li><img src="/static/img/img02.jpg" alt="" width="153" height="153"/><a><p>13时4分58秒</a></p></li>-->
 										<#--<li><img src="/static/img/img03.jpg" alt="" width="153" height="153"/><a><p>13时4分58秒</a></p></li>-->
-										<#--<li><img src="/static/img/img04.jpg" alt="大头网网页特效" width="153" height="153"/></a><p>13时4分58秒</a></p></li>-->
-										<#--<li><img src="/static/img/img05.jpg" alt="" width="153" height="153"/><a><p>13时4分58秒</a></p></li>-->
-										<#--<li><img src="/static/img/img01.jpg" alt="大头网网页特效" width="153" height="153"/></a><p>13时4分58秒</a></p></li>-->
-										<#--<li><img src="/static/img/img02.jpg" alt="" width="153" height="153"/><a><p>13时4分58秒</a></p></li>-->
-										<#--<li><img src="/static/img/img03.jpg" alt="" width="153" height="153"/><a><p>13时4分58秒</a></p></li>-->
-										<#--<li><img src="/static/img/img04.jpg" alt="大头网网页特效" width="153" height="153"/></a><p>13时4分58秒</a></p></li>-->
-										<#--<li><img src="/static/img/img05.jpg" alt="" width="153" height="153"/><a><p>13时4分58秒</a></p></li>-->
-										<#--<li><img src="/static/img/img05.jpg" alt="" width="153" height="153"/><a><p>13时4分58秒</a></p></li>-->
-										<#--<li><img src="/static/img/img05.jpg" alt="" width="153" height="153"/><a><p>13时4分58秒</a></p></li>-->
-										<#--<li><img src="/static/img/img05.jpg" alt="" width="153" height="153"/><a><p>13时4分58秒</a></p></li>-->
 									</ul>
 								</div>
 							</div>

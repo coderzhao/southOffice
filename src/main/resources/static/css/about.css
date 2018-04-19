@@ -487,10 +487,10 @@ h1 {
     overflow: auto;
 }
 .imgminbox{
-	width: 100px;
+	width: 31%;
 	height: 110px;
 	float: left;
-	margin-right: 20px;
+	margin-right: 2%;
 }
 .event_img{
 	width: 100px;
@@ -500,6 +500,7 @@ h1 {
 	height: 100%;
 }
 .event_text{
-	/*text-align: center;*/
+	text-align: center;
 	color: #ec6941;
+	width: 80px;
 }
