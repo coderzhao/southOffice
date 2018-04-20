@@ -99,7 +99,7 @@ public class FindFaceHandler {
             multipartEntityBuilder.addTextBody("bbox", params.get("bbox")[0]);
         entity = multipartEntityBuilder.build();
         try {
-            response = Request.Post(appConfig.getSDKURI() + "/v0/identify")
+            response = Request.Post(appConfig.getSDKHostIpPort() + "/v0/identify")
                     .connectTimeout(10000)
                     .socketTimeout(30000)
                     .addHeader("Authorization", "Token " + token)
@@ -181,9 +181,9 @@ public class FindFaceHandler {
 //                        faceInfo.put("timestamp",new Date().getTime());
                         faceInfo.put("timestamp",date.getTime());
                         faceInfo.put("time",time);
-                        faceInfo.put("face",appConfig.getURI()+cutFacePathAndName);
+                        faceInfo.put("face",appConfig.getHostIpPort()+cutFacePathAndName);
 //                        faceInfo.put("photo","http://u1961b1648.51mypc.cn:13319/static/resource/"+camera+"/"+picId+""+String.valueOf(i)+".jpg");
-                        faceInfo.put("photo", appConfig.getURI() + drawFacePathAndName);
+                        faceInfo.put("photo", appConfig.getHostIpPort() + drawFacePathAndName);
 //                        faceInfo.put("photo",drawboxImage64Img);
 //                        faceInfo.put("matchFace",face.get("normalized"));
 

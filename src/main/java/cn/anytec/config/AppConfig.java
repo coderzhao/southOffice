@@ -11,11 +11,11 @@ public class AppConfig {
     @Value("${app.sdk.token}")
     private String SDKToken;
 
-    @Value("${app.sdk.uri}")
-    private String SDKURI;
+    @Value("${app.sdk.hostIpPort}")
+    private String SDKHostIpPort;
 
-    @Value("${app.uri}")
-    private String URI;
+    @Value("${app.hostIpPort}")
+    private String hostIpPort;
 
     @Value("${app.storage.drawFace}")
     private String drawFace;
@@ -30,39 +30,23 @@ public class AppConfig {
         return SDKToken;
     }
 
-    public void setSDKToken(String SDKToken) {
-        this.SDKToken = SDKToken;
+    public String getSDKHostIpPort() {
+        return SDKHostIpPort;
     }
 
-    public String getSDKURI() {
-        return SDKURI;
-    }
-
-    public void setSDKURI(String SDKURI) {
-        this.SDKURI = SDKURI;
-    }
-
-    public String getURI() {
-        return URI;
+    public String getHostIpPort() {
+        return hostIpPort;
     }
 
     public String getDrawFace() {
         return drawFace;
     }
 
-    public void setDrawFace(String drawFace) {
-        this.drawFace = drawFace;
-    }
-
     public String getCutFace() {
         return cutFace;
     }
 
-    public void setCutFace(String cutFace) {
-        this.cutFace = cutFace;
-    }
-
-    public String getRegisterUrl(){
+    public String getRegisterUrl() {
         return registerUrl;
     }
 }

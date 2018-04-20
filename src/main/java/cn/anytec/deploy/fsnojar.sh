@@ -36,6 +36,12 @@ read_parameter(){
                 echo "threshold path is null ,please configure it"
                 exit 1
         fi
+        script_path=`cat $config_path/config.ini | grep script_path| awk -F'=' '{ print $2 }' | sed s/[[:space:]]//g`
+        if [ -z $script_path ];then
+                echo "script_path path is null ,please configure it"
+                exit 1
+        fi
+
 #       script_log=`cat $config_path/config.ini | grep script_log| awk -F'=' '{ print $2 }' | sed s/[[:space:]]//g`
 #       if [ -z $script_log ];then
 #               echo "script_log path is null ,please configure it"
@@ -118,7 +124,9 @@ processing_folder(){
                                         #  continue  
                                         #fi
                                         if [ $? -eq 0 ];then
-                                          curl -F "photo=@/$abs_picture" -F "token=${token}" -F "camera=${camera}" -F "threshold=${threshold}" ${api}
+                                          #curl -F "photo=@/$abs_picture" -F "token=${token}" -F "camera=${camera}" -F "threshold=${threshold}" ${api}
+
+                                          /usr/bin/python3 ${script_path}/split_data.py  ${abs_picture}  ${token} ${camera} ${threshold} ${api}
                                           echo "end handling pic $abs_picture"
                                           mv $abs_picture $backup_date
                                         else
@@ -170,6 +178,7 @@ IFS=$(echo -en "\n\b")
 while ((1))
 do
         processing_folder $pic_path
+        sleep 1
 done
 #用完恢复老的IFS
 IFS=$old_IFS

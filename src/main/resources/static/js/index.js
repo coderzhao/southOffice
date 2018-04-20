@@ -27,6 +27,7 @@ function imgShow(outerdiv, innerdiv, bigimg, obj) {
 }
 var websocket;
 var repeatTimes=10;
+var local_port=window.location.port
 $(document).ready(function () {
 
     var pushContent = [];
@@ -118,7 +119,7 @@ $(document).ready(function () {
         initWebsocket();
     };
     function initWebsocket() {
-        websocket = new WebSocket("ws://" + window.location.hostname + ":8090/webSocketServer");
+        websocket = new WebSocket("ws://" + window.location.hostname + ":"+local_port+"/webSocketServer");
         // websocket = new WebSocket("ws://" + window.location.hostname + ":13319/webSocketServer");
         websocket.onopen =openFunc;
         websocket.onmessage =onmessageFunc;
@@ -126,7 +127,7 @@ $(document).ready(function () {
         websocket.onclose=oncloseFunc;
     }
     initWebsocket()
-    setInterval(function () {
-        websocket.send("hello")
-    },500000);
+    // setInterval(function () {
+    //     websocket.send("hello")
+    // },500000);
 });
